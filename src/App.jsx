@@ -14,7 +14,7 @@ import image6 from "./images/image6.png";
 import infoIcon from "./assets/Info icon.svg";
 // bookDetail (image4.png) removed per request
 
-pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
 
 const featureCards = [
   {
