@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color-scheme: dark;
+  background: #09101f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #09101f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #000000;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  box-shadow: 0 0 0 1000px #ffffff inset;
+  transition: background-color 9999s ease-out 0s;
+}
+
+.included-card {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 372px;
+  height: 242px;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  padding: 25px;
+  text-align: left;
+  border: 1px solid rgba(20, 32, 52, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: 0 16px 25.6px rgba(20, 32, 52, 0.06);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.included-card-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.mastery-loop-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 16px;
+  column-gap: 16px;
+}
+
+@media (min-width: 920px) {
+  .mastery-loop-grid {
+    display: inline-grid;
+    width: 896px;
+    max-width: 896px;
+    grid-template-rows: 157.7px 157.7px;
+    grid-template-columns: 440px 440px;
+    row-gap: 16px;
+    column-gap: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .included-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .included-card-grid {
+    display: flex;
+    width: 1152px;
+    height: auto;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 18px;
+    flex-shrink: 0;
+  }
+}
+
+.included-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(24, 32, 48, 0.08);
+}
+
+.included-card-corner {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 144px;
+  height: 144px;
+  border-bottom-left-radius: 100%;
+  background: rgba(20, 125, 137, 0.1);
+}
+
+.included-card-icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 60px;
+  height: 60px;
+  place-items: center;
+  border: 1px solid rgba(20, 32, 52, 0.06);
+  border-radius: 14px;
+  background: var(--card-color);
+  color: #142034;
+}
+
+.included-card-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.included-card-badge,
+.included-card-title,
+.included-card-description,
+.included-card-number {
+  position: relative;
+  z-index: 1;
+}
+
+.included-card-badge {
+  margin-top: 20px;
+  color: var(--badge-color);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.included-card-title {
+  max-width: 340px;
+  margin-top: 12px;
+  color: #18243a;
+  font-size: 1.65rem;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 1.3;
+}
+
+.included-card-description {
+  max-width: 430px;
+  margin-top: 20px;
+  color: #6d7583;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.included-card-number {
+  position: absolute;
+  z-index: 2;
+  top: 28px;
+  right: 21px;
+  color: #82908e;
+  font-size: 0.9rem;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.included-card-corner {
+  background: var(--card-color);
+}
+
+@media (max-width: 640px) {
+  .included-card {
+    height: 242px;
+    padding: 24px;
+  }
+
+  .included-card-title {
+    font-size: 1.4rem;
+  }
+
+  .included-card-description {
+    font-size: 0.98rem;
+  }
+}
+
+.book-sheet-next,
+.book-sheet-prev {
+  height: 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.book-sheet-front,
+.book-sheet-back {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.book-sheet-next {
+  transform-origin: left center;
+  animation: flipBookNext 700ms cubic-bezier(0.42, 0, 0.58, 1) forwards;
+}
+
+.book-sheet-next .book-sheet-front { transform: rotateY(0deg); }
+.book-sheet-next .book-sheet-back { transform: rotateY(180deg); }
+
+@keyframes flipBookNext {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(-90deg); }
+  100% { transform: rotateY(-180deg); }
+}
+
+.book-sheet-prev {
+  transform-origin: right center;
+  animation: flipBookPrev 700ms cubic-bezier(0.42, 0, 0.58, 1) forwards;
+}
+
+.book-sheet-prev .book-sheet-front { transform: rotateY(0deg); }
+.book-sheet-prev .book-sheet-back { transform: rotateY(-180deg); }
+
+@keyframes flipBookPrev {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(180deg); }
+}
+
+.book-sheet-front canvas,
+.book-sheet-back canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  backface-visibility: hidden;
+}
+
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  animation: heroWordReveal 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes heroWordReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-word {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+.nav-menu-link {
+  position: relative;
+}
+
+.nav-menu-link::after {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.15rem;
+  left: 0.5rem;
+  height: 2px;
+  border-radius: 999px;
+  background: #f8c94b;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 220ms ease;
+}
+
+.nav-menu-link:hover::after,
+.nav-menu-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-menu-link::after {
+    transition: none;
+  }
+}
