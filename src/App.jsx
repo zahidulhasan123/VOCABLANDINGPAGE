@@ -14,7 +14,10 @@ import image6 from "./images/image6.png";
 import infoIcon from "./assets/Info icon.svg";
 // bookDetail (image4.png) removed per request
 
-pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url,
+).toString();
 
 const featureCards = [
   {
@@ -654,7 +657,7 @@ function App() {
               </div>
 
               <h1
-                className="mt-8 whitespace-nowrap text-[clamp(2.15rem,5vw,4.12rem)] font-black tracking-[-0.05em] text-[#f8cb54] leading-[0.98]"
+                className="hero-title-primary mt-8 whitespace-nowrap text-[clamp(2.15rem,5vw,4.12rem)] font-black tracking-[-0.05em] text-[#f8cb54] leading-[0.98]"
                 aria-label="Oxford 3000 Vocab"
               >
                 {["Oxford", "3000", "Vocab"].map((word, index) => (
@@ -668,7 +671,7 @@ function App() {
                 ))}
               </h1>
               <h2
-                className="mt-3 whitespace-nowrap text-[clamp(2rem,4.1vw,3.18rem)] font-black tracking-[-0.05em] text-white leading-[1.02]"
+                className="hero-title-secondary mt-3 whitespace-nowrap text-[clamp(2rem,4.1vw,3.18rem)] font-black tracking-[-0.05em] text-white leading-[1.02]"
                 aria-label="Complete Learning System"
               >
                 {["Complete", "Learning", "System"].map((word, index) => (
@@ -735,16 +738,16 @@ function App() {
               </div>
             </div>
 
-            <div className="relative justify-self-end w-[min(100%,640px)] translate-x-3 lg:translate-x-6">
+            <div className="relative w-[min(100%,640px)] justify-self-center translate-x-0 lg:justify-self-end lg:translate-x-6">
               <img
                 src={heroArtwork}
                 alt="Oxford 3000 vocabulary pack"
-                className="block w-full select-none object-contain drop-shadow-[0_18px_40px_rgba(0,0,0,0.45)]"
+                className="mx-auto block w-full select-none object-contain drop-shadow-[0_18px_40px_rgba(0,0,0,0.45)]"
               />
             </div>
           </div>
 
-          <div className="mx-3 grid gap-4 border-t border-white/10 pb-8 pt-8 sm:grid-cols-2 lg:grid-cols-6 lg:gap-0 lg:px-8">
+          <div className="mx-3 grid grid-cols-2 gap-4 border-t border-white/10 pb-8 pt-8 sm:grid-cols-2 lg:grid-cols-6 lg:gap-0 lg:px-8">
             {[
               ["৩,০০০", "মূল শব্দ"],
               ["৩,০০০", "Dedicated Video"],
@@ -755,7 +758,7 @@ function App() {
             ].map(([title, subtitle]) => (
               <div
                 key={title + subtitle}
-                className="border-l border-white/10 pl-4 first:border-l-0 first:pl-0 lg:px-4"
+                className="hero-stat border-l border-white/10 pl-4 first:border-l-0 first:pl-0 lg:px-4"
               >
                 <div className="text-2xl font-black text-[#f7c84f]">
                   {title}
@@ -824,7 +827,7 @@ function App() {
         <div className="absolute right-0 top-0 h-32 w-32 rounded-full border border-[#d9d3c8] opacity-60" />
         <div className="absolute left-0 bottom-0 h-28 w-28 rounded-full border border-[#d9d3c8] opacity-60" />
 
-        <div className="mx-auto max-w-[1152px] text-center">
+        <div className="mx-auto max-w-[1200px] text-center">
           <div className="text-[0.72rem] font-bold uppercase tracking-[0.42em] text-[#af8f46]">
             Included with the book
           </div>
@@ -1211,7 +1214,7 @@ function App() {
       "
           >
             {/* ================= LEFT CONTENT ================= */}
-            <div className="text-left">
+            <div className="text-center lg:text-left">
               {/* THE BOOK, UNPACKED */}
               <div
                 className="
@@ -1233,7 +1236,10 @@ function App() {
                 className="
             mt-[14px]
             w-full
-            whitespace-nowrap
+            whitespace-normal
+            lg:whitespace-nowrap
+            text-center
+            lg:text-left
             font-['Hind_Siliguri']
             text-[40px]
             font-bold
@@ -1248,9 +1254,10 @@ function App() {
 
             {/* ================= RIGHT DESCRIPTION ================= */}
             <div
-              className="
+          className="
           flex
           items-start
+          justify-center
           lg:justify-end
         "
             >
@@ -1265,7 +1272,8 @@ function App() {
             leading-[30.27px]
             tracking-[-0.44px]
             text-[#4D5A6B]
-            text-left
+            text-center
+            lg:text-left
           "
               >
                 একটি Word Page-এ শুধু অর্থ নয়—উচ্চারণ, ব্যবহার ও Revision-এর
@@ -1306,7 +1314,7 @@ function App() {
 
       <section
         id="decision"
-        className="
+        className="decision-section
     relative
     overflow-hidden
     bg-[#050812]
@@ -1751,7 +1759,7 @@ function App() {
         BOTTOM CTA
     ========================================================= */}
           <div
-            className="
+            className="decision-cta
         mt-[14px]
         flex
         min-h-[78px]
@@ -1799,8 +1807,8 @@ function App() {
 
             {/* ORDER BUTTON */}
             <a
-              href="#"
-              className="
+              href="#order"
+              className="button button--primary
           flex
           h-[48px]
           min-w-[198px]
@@ -3953,7 +3961,7 @@ function App() {
         LEFT CONTENT
     ======================================================= */}
           <div
-            className="
+            className="android-copy
         flex
         w-full
         max-w-[447.55px]
@@ -4367,7 +4375,7 @@ function App() {
       ===================================================== */}
 
             <div
-              className="
+              className="faq-sidebar
           flex
           w-full
           flex-col
@@ -5389,7 +5397,7 @@ function App() {
         LEFT SIDE CONTENT
     ===================================================== */}
           <div
-            className="
+            className="order-copy
         relative
         z-10
         px-6
@@ -5467,7 +5475,7 @@ function App() {
           BENEFIT CARDS
       ================================================= */}
             <div
-              className="
+              className="order-benefit-grid
           mt-[28px]
           grid
           w-full
@@ -5750,7 +5758,7 @@ function App() {
             DELIVERY RIBBON
         ================================================= */}
               <div
-                className="
+                className="order-delivery-ribbon
             flex
             h-[44.5px]
             w-full
@@ -5913,7 +5921,7 @@ function App() {
 
                 {/* Price details */}
                 <div
-                  className="
+                  className="order-price-details
               mt-[9px]
               flex
               items-center
@@ -5939,7 +5947,7 @@ function App() {
 
                 {/* COD chip */}
                 <div
-                  className="
+                  className="order-cod-chip
               mt-[14px]
               inline-flex
               h-[25.22px]
