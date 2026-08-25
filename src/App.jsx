@@ -12,6 +12,10 @@ import bookDetail from "./images/image4.png";
 import androidApp from "./images/image5.png";
 import image6 from "./images/image6.png";
 import infoIcon from "./assets/Info icon.svg";
+import sparkleIcon from "./assets/Icon.svg";
+import Footer from "./footer";
+import Header from "./header";
+import PrivacyPolicy from "./privacy-policy";
 // bookDetail (image4.png) removed per request
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
@@ -209,6 +213,9 @@ const PdfFlipPage = forwardRef(function PdfFlipPage({ children }, ref) {
 });
 
 function App() {
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(
+    () => typeof window !== "undefined" && (window.location.pathname === "/privacy-policy" || window.location.hash === "#privacy-policy"),
+  );
   const [expandedIndex, setExpandedIndex] = useState(-1);
 
   const [videoPlaying, setVideoPlaying] = useState(false);
@@ -237,6 +244,16 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderMessage, setOrderMessage] = useState("");
   const [orderError, setOrderError] = useState("");
+
+  useEffect(() => {
+    const handleLocationChange = () => setShowPrivacyPolicy(window.location.pathname === "/privacy-policy" || window.location.hash === "#privacy-policy");
+    window.addEventListener("hashchange", handleLocationChange);
+    window.addEventListener("popstate", handleLocationChange);
+    return () => {
+      window.removeEventListener("hashchange", handleLocationChange);
+      window.removeEventListener("popstate", handleLocationChange);
+    };
+  }, []);
 
   // =========================
   // AUTO HIDE ORDER ALERT
@@ -492,6 +509,10 @@ function App() {
     },
   ];
 
+  if (showPrivacyPolicy) {
+    return <main className="min-h-screen bg-[#050812] text-white"><Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} activeSection={activeSection} scrollProgress={scrollProgress} /><PrivacyPolicy /><Footer /></main>;
+  }
+
   return (
     <main className="min-h-screen bg-[#050812] text-white">
       {/* =================================================
@@ -532,124 +553,17 @@ function App() {
       <section id="top" className="relative overflow-hidden bg-[#060b18]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_30%,rgba(65,118,255,0.34),transparent_0_22%),radial-gradient(circle_at_82%_70%,rgba(249,199,75,0.12),transparent_0_18%),linear-gradient(180deg,#060b18_0%,#0b172f_100%)]" />
         <div className="relative mx-auto max-w-[1240px] px-3 pb-4 pt-[92px] sm:px-5 sm:pt-[96px] lg:px-0 lg:pt-[84px]">
-          <header className="fixed left-0 right-0 top-0 z-[100] h-[80px] min-h-[80px] w-full bg-[#050811] shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
-            <div className="mx-auto flex h-[80px] min-h-[80px] w-full max-w-[1152px] items-center justify-between px-4 sm:px-6 lg:px-0">
-              <a
-                href="/"
-                className="flex items-center gap-3"
-                aria-label="Homepage"
-              >
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <img
-                    src={logo}
-                    alt="Oxford 3000 logo"
-                    className="h-10 w-10 rounded-full object-contain sm:h-11 sm:w-11"
-                  />
-                  <div>
-                    <div className="text-sm font-semibold leading-none sm:text-base">
-                      Oxford 3000
-                    </div>
-                    <div className="whitespace-nowrap text-[0.46rem] uppercase tracking-[0.1em] text-[#f7c84f] sm:text-[0.56rem] sm:tracking-[0.18em]">
-                      Vocabulary System
-                    </div>
-                  </div>
-                </div>
-              </a>
-
-              <nav className="hidden items-center gap-6 text-sm text-white/84 xl:flex">
-                {[
-                  ["how-it-works", "কীভাবে কাজ করে"],
-                  ["book", "বই দেখুন"],
-                  ["package", "সম্পূর্ণ প্যাকেজ"],
-                  ["student-stories", "শিক্ষার্থীদের অভিজ্ঞতা"],
-                  ["android-app", "App দেখুন"],
-                  ["faq", "প্রশ্নোত্তর"],
-                ].map(([id, label]) => (
-                  <a
-                    key={id}
-                    href={`#${id}`}
-                    className={`nav-menu-link whitespace-nowrap rounded-md px-2 py-1 font-medium transition ${activeSection === id ? "bg-white/12 text-white" : "hover:text-white"}`}
-                  >
-                    {label}
-                  </a>
-                ))}
-              </nav>
-
-              <button
-                type="button"
-                aria-label={mobileMenuOpen ? "মেনু বন্ধ করুন" : "মেনু খুলুন"}
-                aria-expanded={mobileMenuOpen}
-                onClick={() => setMobileMenuOpen((open) => !open)}
-                className="ml-auto grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-white transition hover:bg-white/10 xl:hidden"
-              >
-                <span className="sr-only">মেনু</span>
-                <span className="flex w-5 flex-col gap-1.5">
-                  <span className="h-0.5 w-full bg-current" />
-                  <span className="h-0.5 w-full bg-current" />
-                  <span className="h-0.5 w-full bg-current" />
-                </span>
-              </button>
-
-              <a
-                href="#order"
-                className="hidden h-[46.938px] min-h-[46.4px] w-[242.047px] items-center justify-center gap-[8.8px] rounded-[12px] border border-[rgba(0,0,0,0)] bg-[linear-gradient(135deg,#FFE38E_0%,#F8C94B_46%,#F2B81E_100%)] px-[18.4px] py-[12.48px] text-sm font-bold text-[#10172a] shadow-[0_11px_26px_0_rgba(248,201,75,0.22),0_1px_0_0_rgba(255,255,255,0.50)_inset] transition hover:-translate-y-0.5 hover:brightness-105 xl:flex"
-              >
-                এখনই অর্ডার করুন
-                <svg
-                  viewBox="0 0 20 20"
-                  className="h-4 w-4 shrink-0"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M4 10h11M10.5 5.5 15 10l-4.5 4.5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.8"
-                  />
-                </svg>
-              </a>
-
-              {mobileMenuOpen && (
-                <nav className="absolute left-0 right-0 top-full z-50 flex flex-col gap-1 border-t border-white/10 bg-[#050811] p-4 text-sm text-white/85 shadow-xl xl:hidden">
-                  {[
-                    ["#how-it-works", "কীভাবে কাজ করে"],
-                    ["#book", "বই দেখুন"],
-                    ["#package", "সম্পূর্ণ প্যাকেজ"],
-                    ["#student-stories", "শিক্ষার্থীদের অভিজ্ঞতা"],
-                    ["#android-app", "App দেখুন"],
-                    ["#faq", "প্রশ্নোত্তর"],
-                  ].map(([href, label]) => (
-                    <a
-                      key={href}
-                      href={href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`nav-menu-link whitespace-nowrap rounded-lg px-3 py-3 font-medium transition ${activeSection === href.slice(1) ? "bg-white/12 text-white" : "hover:bg-white/10 hover:text-white"}`}
-                    >
-                      {label}
-                    </a>
-                  ))}
-                  <a
-                    href="#order"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="mt-2 flex items-center justify-center rounded-xl bg-[#f8c94b] px-4 py-3 font-bold text-[#10172a]"
-                  >
-                    এখনই অর্ডার করুন
-                  </a>
-                </nav>
-              )}
-            </div>
-            <div
-              className="pointer-events-none absolute bottom-0 left-0 h-[2px] bg-[#f8c94b] transition-[width] duration-150 ease-out"
-              style={{ width: `${scrollProgress}%` }}
-            />
-          </header>
+          <Header
+            mobileMenuOpen={mobileMenuOpen}
+            setMobileMenuOpen={setMobileMenuOpen}
+            activeSection={activeSection}
+            scrollProgress={scrollProgress}
+          />
 
           <div className="grid items-center gap-6 px-3 pb-10 pt-20 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8 lg:pt-24">
             <div className="max-w-[560px] lg:pr-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#f7c84f]/30 bg-[#0c1426] px-4 py-2 text-[0.72rem] font-medium text-[#f7c84f] shadow-soft">
-                <span className="text-sm">◂</span>
+                <span className="text-sm" aria-hidden="true"><img src={sparkleIcon} alt="" className="sparkle-icon h-4 w-4" /></span>
                 বাংলাদেশে আমরাই প্রথম
               </div>
 
@@ -1365,13 +1279,15 @@ function App() {
     max-w-[560px]
     font-['Hind_Siliguri']
     text-[46.08px]
+    max-lg:text-[clamp(2rem,7vw,46.08px)]
     font-bold
     leading-[52.53px]
+    max-lg:leading-[1.18]
     tracking-[-0.79px]
     text-white
   "
               >
-                <span className="block whitespace-nowrap font-['Hind_Siliguri'] font-bold">
+                <span className="block font-['Hind_Siliguri'] font-bold">
                   শুধু বই নয়—পুরো একটি
                 </span>
 
@@ -1413,7 +1329,8 @@ function App() {
                 alt="Book and digital learning support"
                 className="
             block
-            w-[min(600px,100%)]
+              w-full
+              max-w-[600px]
             select-none
             object-contain
             drop-shadow-[0_20px_45px_rgba(0,0,0,0.45)]
@@ -1529,7 +1446,7 @@ function App() {
                   </h3>
 
                   <p className="mt-[7px] font-['Hind_Siliguri'] text-[13px] leading-[21px] text-[#8E99AA]">
-                    <span className="block whitespace-nowrap">
+                    <span className="block">
                       শব্দ অনুশীলন ও revision-এর জন্য বইয়ের সঙ্গে
                     </span>
 
@@ -1583,7 +1500,7 @@ function App() {
                   </h3>
 
                   <p className="mt-[7px] font-['Hind_Siliguri'] text-[13px] leading-[21px] text-[#8E99AA]">
-                    <span className="block whitespace-nowrap">
+                    <span className="block">
                       শুনুন, নিজে উচ্চারণ করুন এবং মনে রাখার চেষ্টা
                     </span>
                     <span className="block">করুন।</span>
@@ -1636,7 +1553,7 @@ function App() {
                   </h3>
 
                   <p className="mt-[7px] font-['Hind_Siliguri'] text-[13px] leading-[21px] text-[#8E99AA]">
-                    <span className="block whitespace-nowrap">
+                    <span className="block">
                       কঠিন অংশ ও ব্যবহার বুঝতে ধাপে ধাপে video
                     </span>
                     <span className="block">support।</span>
@@ -1740,7 +1657,7 @@ function App() {
                   </h3>
 
                   <p className="mt-[7px] font-['Hind_Siliguri'] text-[13px] leading-[21px] text-[#8E99AA]">
-                    <span className="block whitespace-nowrap">
+                    <span className="block">
                       শেখা, revision ও পরবর্তী ধাপ গুছিয়ে এগোনোর
                     </span>
                     <span className="block">ব্যবস্থা।</span>
@@ -2419,7 +2336,14 @@ function App() {
             bg-[#07152D]
             shadow-[0_20px_45px_rgba(0,0,0,0.35)]
           "
-              >
+          >
+                <iframe
+                  className="absolute inset-0 z-50 h-full w-full border-0"
+                  src="https://www.youtube.com/embed/Pa0QmStjIUE?rel=0"
+                  title="Student review video 1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
                 {/* Background */}
                 <div
                   className="
@@ -2634,7 +2558,14 @@ function App() {
             bg-[#07152D]
             shadow-[0_20px_45px_rgba(0,0,0,0.35)]
           "
-              >
+          >
+                <iframe
+                  className="absolute inset-0 z-50 h-full w-full border-0"
+                  src="https://www.youtube.com/embed/3OSRv0XbYQE?rel=0"
+                  title="Student review video 2"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
                 {/* Background */}
                 <div
                   className="
@@ -2849,7 +2780,14 @@ function App() {
             bg-[#07152D]
             shadow-[0_20px_45px_rgba(0,0,0,0.35)]
           "
-              >
+          >
+                <iframe
+                  className="absolute inset-0 z-50 h-full w-full border-0"
+                  src="https://www.youtube.com/embed/_YxU5qvYSYg?rel=0"
+                  title="Student review video 3"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
                 {/* Background */}
                 <div
                   className="
@@ -5257,7 +5195,7 @@ function App() {
 
       <section className="relative overflow-hidden bg-[#fff0c9] px-6 py-14 sm:px-8 lg:px-0 lg:py-[56px]">
         <div className="mx-auto grid w-full max-w-[1152px] grid-cols-1 items-center gap-6 rounded-[24px] border border-[rgba(248,201,75,0.34)] bg-[#071229] p-7 shadow-[0_28px_70px_0_rgba(4,9,20,0.18)] sm:grid-cols-[68px_minmax(0,1fr)] lg:h-[160.375px] lg:grid-cols-[68px_760.41px_200px] lg:gap-8 lg:p-[28.8px]">
-          <div className="grid h-[68px] w-[68px] place-items-center rounded-full border border-[#f8c94b]">
+          <div className="grid h-[68px] w-[68px] place-self-center place-items-center rounded-full border border-[#f8c94b]">
             <svg
               viewBox="0 0 32 32"
               className="h-7 w-7 text-[#f8c94b]"
@@ -5748,9 +5686,10 @@ function App() {
     lg:w-[514.09px]
     lg:max-w-none
     lg:p-[34px]
+        max-[520px]:p-[16px]
   "
           >
-            <div className="flex flex-col gap-[16.17px]">
+            <div className="flex flex-col gap-[16.17px] max-[520px]:gap-[10px]">
               {/* =================================================
             DELIVERY RIBBON
         ================================================= */}
@@ -5770,6 +5709,11 @@ function App() {
             sm:flex-row
             sm:gap-[8px]
             sm:py-[11px]
+            max-[520px]:h-[38px]
+            max-[520px]:px-[5px]
+            max-[520px]:py-0
+            max-[520px]:flex-row
+            max-[520px]:gap-[5px]
           "
               >
                 {/* Truck */}
@@ -5819,6 +5763,8 @@ function App() {
               font-normal
               leading-[12px]
               text-[#DBEAF4]
+              max-[520px]:whitespace-normal
+              max-[520px]:text-center
             "
                 >
                   সারা দেশে ক্যাশ অন ডেলিভারি — ডেলিভারি চার্জ মাত্র
@@ -5852,6 +5798,9 @@ function App() {
             bg-[rgba(255,255,255,0.6)]
             px-[16.2px]
             py-[16.2px]
+            max-[520px]:min-h-[126px]
+            max-[520px]:px-[12px]
+            max-[520px]:py-[12px]
           "
               >
                 {/* Top row */}
@@ -5922,6 +5871,7 @@ function App() {
               mt-[9px]
               flex
               items-center
+              justify-start
               gap-[8px]
               font-['Hind_Siliguri']
               text-[12.16px]
@@ -5954,6 +5904,8 @@ function App() {
               bg-[rgba(248,201,75,0.15)]
               px-[8.96px]
               py-[5.12px]
+              flex
+              w-fit
             "
                 >
                   <span
@@ -6035,6 +5987,8 @@ function App() {
                   focus:border-[#F8C94B]
                   focus:ring-2
                   focus:ring-[#F8C94B]/20
+                  max-[520px]:mt-[2px]
+                  max-[520px]:h-[42px]
                 "
                     />
                   </div>
@@ -6080,13 +6034,15 @@ function App() {
                   focus:border-[#F8C94B]
                   focus:ring-2
                   focus:ring-[#F8C94B]/20
+                  max-[520px]:mt-[2px]
+                  max-[520px]:h-[42px]
                 "
                     />
                   </div>
                 </div>
 
                 {/* DISTRICT */}
-                <div className="mt-[13px]">
+                <div className="mt-[13px] max-[520px]:mt-[10px]">
                   <label
                     htmlFor="district"
                     className="
@@ -6122,12 +6078,14 @@ function App() {
                 focus:border-[#F8C94B]
                 focus:ring-2
                 focus:ring-[#F8C94B]/20
+                max-[520px]:mt-[2px]
+                max-[520px]:h-[42px]
               "
                   />
                 </div>
 
                 {/* FULL ADDRESS */}
-                <div className="mt-[13px]">
+                <div className="mt-[13px] max-[520px]:mt-[10px]">
                   <label
                     htmlFor="address"
                     className="
@@ -6165,6 +6123,8 @@ function App() {
                 focus:border-[#F8C94B]
                 focus:ring-2
                 focus:ring-[#F8C94B]/20
+                max-[520px]:mt-[2px]
+                max-[520px]:h-[68px]
               "
                   />
                 </div>
@@ -6242,7 +6202,7 @@ function App() {
               >
                 তথ্য শুধু ডেলিভারির জন্য ব্যবহার হবে{" "}
                 <a
-                  href="#privacy-policy"
+                  href="/privacy-policy"
                   className="
               font-medium
               text-[#73500C]
@@ -6262,287 +6222,11 @@ function App() {
       </section>
 
       {/* =========================================================
-    FOOTER
-========================================================= */}
-      <footer
-        className="
-    box-border
-    w-full
-    border-t
-    border-[rgba(255,255,255,0.13)]
-    bg-[#040914]
-    px-4
-    pb-[20px]
-    pt-[52px]
-    sm:px-6
-    lg:px-8
-  "
-      >
-        {/* =====================================================
-      MAIN CONTAINER
-  ===================================================== */}
-        <div
-          className="
-      mx-auto
-      flex
-      w-full
-      max-w-[1152px]
-      flex-col
-      justify-between
-      gap-[48px]
-      lg:flex-row
-      lg:items-start
-    "
-        >
-          {/* =================================================
-        LEFT BRAND AREA
-    ================================================= */}
-          <div
-            className="
-        flex
-        w-full
-        flex-col
-        items-start
-        lg:w-[371.5px]
-      "
-          >
-            {/* Logo + Brand */}
-            <a
-              href="#top"
-              className="
-          flex
-          h-[55.19px]
-          min-h-[44px]
-          items-center
-          gap-[10.4px]
-          no-underline
-        "
-            >
-              {/* Logo */}
-              <img
-                src={logo}
-                alt="Oxford 3000 Vocabulary System"
-                className="
-            h-[37.64px]
-            w-[49.59px]
-            shrink-0
-            object-contain
-          "
-              />
+          FOOTER
+      ========================================================= */}
 
-              {/* Brand */}
-              <div
-                className="
-            flex
-            h-[31px]
-            w-[148.97px]
-            shrink-0
-            flex-col
-          "
-              >
-                {/* Oxford 3000 */}
-                <div
-                  className="
-              whitespace-nowrap
-              font-['Inter']
-              text-[15.36px]
-              font-bold
-              leading-[16px]
-              tracking-[-0.0312px]
-              text-white
-            "
-                >
-                  Oxford 3000
-                </div>
-
-                {/* Vocabulary System */}
-                <div
-                  className="
-              mt-[4px]
-              whitespace-nowrap
-              font-['Inter']
-              text-[11.36px]
-              font-semibold
-              uppercase
-              leading-[12px]
-              tracking-[1.1786px]
-              text-[#F8C94B]
-            "
-                >
-                  Vocabulary System
-                </div>
-              </div>
-            </a>
-
-            {/* Description */}
-            <p
-              className="
-          m-0
-          mt-[8px]
-          w-full
-          max-w-[371.5px]
-          whitespace-nowrap
-          font-['Inter']
-          text-[13.76px]
-          font-normal
-          leading-[23px]
-          tracking-[-0.131688px]
-          text-[#B2BFD0]
-        "
-            >
-              English Commando-এর বই ও digital learning support একসাথে।
-            </p>
-          </div>
-
-   {/* =================================================
-        RIGHT SIDE
-    ================================================= */}
-          <div
-            className="
-        flex
-        w-full
-        flex-col
-        items-start
-        lg:w-[204.31px]
-        lg:items-start
-      "
-          >
-            {/* Phone */}
-            <a
-              href="tel:01405458800"
-              className="
-          flex
-          h-[44px]
-          min-h-[44px]
-          items-center
-          whitespace-nowrap
-          no-underline
-          transition-colors
-          hover:text-white
-        "
-            >
-              <span
-                className="
-            font-['Hind_Siliguri']
-            text-[16px]
-            font-normal
-            leading-[27px]
-            tracking-[-0.3125px]
-            text-[#D0D9E6]
-          "
-              >
-                কল করুন: 0140-545-8800-2
-              </span>
-            </a>
-
-            {/* Privacy Policy */}
-            <a
-              href="#privacy-policy"
-              className="
-          ml-0
-          flex
-          h-[44px]
-          min-h-[44px]
-          items-center
-          whitespace-nowrap
-          no-underline
-          transition-colors
-          hover:text-white
-          lg:ml-[106px]
-        "
-            >
-              <span
-                className="
-            font-['Hind_Siliguri']
-            text-[16px]
-            font-normal
-            leading-[27px]
-            tracking-[-0.3125px]
-            text-[#D0D9E6]
-          "
-              >
-                গোপনীয়তা নীতি
-              </span>
-            </a>
-
-            {/* Back To Top */}
-            <a
-              href="#top"
-              className="
-          ml-0
-          flex
-          h-[44px]
-          min-h-[44px]
-          items-center
-          gap-[6.4px]
-          whitespace-nowrap
-          no-underline
-          transition-colors
-          hover:text-white
-          lg:ml-[86px]
-        "
-            >
-              <span
-                className="
-            font-['Hind_Siliguri']
-            text-[16px]
-            font-normal
-            leading-[27px]
-            tracking-[-0.3125px]
-            text-[#D0D9E6]
-          "
-              >
-                উপরে ফিরে যান
-              </span>
-
-              <svg
-                width="17.59"
-                height="17.59"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="shrink-0"
-              >
-                <path
-                  d="M6 14L12 8L18 14"
-                  stroke="#D0D9E6"
-                  strokeWidth="0.88"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        {/* =====================================================
-      COPYRIGHT
-  ===================================================== */}
-        <div
-          className="
-    mx-auto
-    mt-[18px]
-    w-full
-    max-w-[1152px]
-    border-t
-    border-[rgba(255,255,255,0.13)]
-    pt-[18px]
-  "
-        >
-          <div
-            className="
-        font-['Hind_Siliguri']
-        text-[11.4667px]
-        font-normal
-        leading-[19px]
-        tracking-[0.0358334px]
-        text-[#7F8DA2]
-      "
-          >
-            © 2026 English Commando. সর্বস্বত্ব সংরক্ষিত।
-          </div>
-        </div>
-      </footer>
-   </main>
+      <Footer />
+    </main>
   );
 }
 
