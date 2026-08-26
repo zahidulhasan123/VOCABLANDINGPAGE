@@ -2,7 +2,6 @@ import { forwardRef, useEffect, useRef, useState } from "react";
 import logo from "./images/logo.png";
 import heroArtwork from "./images/image1.png";
 import videoThumb from "./images/image2.png";
-import bookImage from "./images/image3.png";
 import pdfFile from "./assets/PDF/Oxford_3k.pdf";
 import { Document, Page, pdfjs } from "react-pdf";
 import HTMLFlipBook from "react-pageflip";
@@ -18,7 +17,10 @@ import Header from "./header";
 import PrivacyPolicy from "./privacy-policy";
 // bookDetail (image4.png) removed per request
 
-pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url,
+).toString();
 
 const featureCards = [
   {
@@ -226,7 +228,7 @@ function App() {
 
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  const [bookPage, setBookPage] = useState(0);
+  const [bookPage, setBookPage] = useState(1);
 
   const [pdfPages, setPdfPages] = useState(0);
 
@@ -374,29 +376,20 @@ function App() {
   const handleNextPage = () => {
     if (isMobile) {
       setMobileTurnDirection("next");
-      if (bookPage === 0) {
-        setMobilePage(1);
-        setBookPage(1);
-      } else if (pdfPages > 0) {
-        setMobilePage((page) => Math.min(page + 1, pdfPages));
-      }
+      if (pdfPages > 0) setMobilePage((page) => Math.min(page + 1, pdfPages));
       return;
     }
-    if (bookPage === 0) {
-      setBookPage(1);
-    } else if (bookPage < pdfPages) {
+    if (bookPage < pdfPages) {
       flipBookRef.current?.pageFlip()?.flipNext();
     }
   };
   const handlePreviousPage = () => {
     if (isMobile) {
       setMobileTurnDirection("previous");
-      if (mobilePage <= 1) setBookPage(0);
-      else setMobilePage((page) => Math.max(1, page - 1));
+      setMobilePage((page) => Math.max(1, page - 1));
       return;
     }
-    if (bookPage === 1) setBookPage(0);
-    else if (bookPage > 1) {
+    if (bookPage > 1) {
       flipBookRef.current?.pageFlip()?.flipPrev();
     }
   };
@@ -873,14 +866,7 @@ function App() {
                   />
                 </Document>
               </div>
-              {bookPage === 0 ? (
-                <img
-                  src={bookImage}
-                  alt="Open book preview"
-                  className="pdf-cover-image mx-auto mb-8 w-[min(860px,88%)]"
-                />
-              ) : (
-                <div className="pdf-frame mx-auto mb-8 w-[min(860px,88%)]">
+              <div className="pdf-frame mx-auto mb-8 w-[min(860px,88%)]">
                   <Document
                     file={pdfFile}
                     onLoadSuccess={handlePdfLoad}
@@ -949,7 +935,6 @@ function App() {
                     )}
                   </Document>
                 </div>
-              )}
 
               <div className="mt-[24px] flex flex-col items-center">
                 {/* ================= CONTROLS ================= */}
@@ -958,7 +943,7 @@ function App() {
                   <button
                     type="button"
                     onClick={handlePreviousPage}
-                    disabled={bookPage === 0}
+                    disabled={isMobile ? mobilePage <= 1 : bookPage <= 1}
                     className="
                   pdf-control-button
         w-[164px]
