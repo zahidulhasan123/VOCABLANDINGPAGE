@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
+import "./App.css";
 import logo from "./images/logo.png";
 import heroArtwork from "./images/image1.png";
 import videoThumb from "./images/image2.png";
@@ -10,6 +11,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 import bookDetail from "./images/image4.png";
 import androidApp from "./images/image5.png";
 import image6 from "./images/image6.png";
+import explainerUnderline from "./images/Vector 35.png";
 import infoIcon from "./assets/Info icon.svg";
 import sparkleIcon from "./assets/Icon.svg";
 import Footer from "./footer";
@@ -21,41 +23,35 @@ pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
 
 const featureCards = [
   {
-    badge: "ভিডিও সহায়তা",
-    title: "৩,০০০ Dedicated Video Lesson",
-    description: "প্রতিটি শব্দ বুঝতে রয়েছে dedicated visual lesson",
-    icon: "video",
-    color: "#D9F6F8",
-    badgeColor: "#147D89",
-    accent: "bg-[#dff7fb] text-[#2c7f93]",
-    bubble: "০১",
-    bubbleTone: "bg-[#e2f1f4]",
-  },
-  {
-    badge: "শুনে শিখুন",
-    title: "সম্পূর্ণ বইয়ের Audio Podcast",
-    description: "যেকোনো সময় শুনে শিখতে পারবেন অডিও দিয়ে",
-    icon: "audio",
-    color: "#FFF0CE",
-    badgeColor: "#A86600",
-    accent: "bg-[#f9efd7] text-[#bb7a10]",
-    bubble: "০২",
-    bubbleTone: "bg-[#f3ead6]",
-  },
-  {
     badge: "যেকোনো জায়গায়",
-    title: "Dedicated Android App",
-    description: "Offline ব্যবহারযোগ্য—ইন্টারনেট ছাড়াও প্র্যাকটিস করুন।",
+    title: "অ্যান্ড্রয়েড অ্যাপ",
+    description: "অফলাইনে ব্যবহারযোগ্য—ইন্টারনেট ছাড়াও প্র্যাকটিস করুন।",
     icon: "app",
     color: "#E2EAFF",
     badgeColor: "#3158A5",
-    accent: "bg-[#dee7ff] text-[#4561d7]",
+    bubble: "০১",
+  },
+  {
+    badge: "ভিডিও সহায়তা",
+    title: "ভিডিও লেসন",
+    description: "প্রতিটি শব্দ বুঝতে রয়েছে ডেডিকেটেড ভিজুয়াল লেসন।",
+    icon: "video",
+    color: "#D9F6F8",
+    badgeColor: "#147D89",
+    bubble: "০২",
+  },
+  {
+    badge: "শুনে শিখুন",
+    title: "অডিও পডকাস্ট",
+    description: "যেকোনো সময় শুনে শব্দগুলো ঝালিয়ে নিন।",
+    icon: "audio",
+    color: "#FFF0CE",
+    badgeColor: "#A86600",
     bubble: "০৩",
-    bubbleTone: "bg-[#e2e8f7]",
   },
   {
     badge: "বলার অনুশীলন",
-    title: "Vocal Exercise",
+    title: "ভোকাল এক্সারসাইজ",
     description: "উচ্চারণ ঠিক করতে বলার অভ্যাস গড়ে তুলুন।",
     icon: "mic",
     color: "#F0E5FB",
@@ -66,7 +62,7 @@ const featureCards = [
   },
   {
     badge: "মজার চ্যালেঞ্জ",
-    title: "২৮টি Tongue Twister",
+    title: "টাং টুইস্টার",
     description: "শব্দ বলার জড়তা কাটাতে ছোট ছোট অনুশীলন।",
     icon: "note",
     color: "#FDE8E3",
@@ -77,7 +73,7 @@ const featureCards = [
   },
   {
     badge: "মনে রাখার সিস্টেম",
-    title: "Practice + Revision Support",
+    title: "প্র্যাকটিস + রিভিশন",
     description: "বারবার চর্চায় শেখা শব্দগুলো মনে ধরে রাখুন।",
     icon: "refresh",
     color: "#E1F3E7",
@@ -213,7 +209,10 @@ const PdfFlipPage = forwardRef(function PdfFlipPage({ children }, ref) {
 
 function App() {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(
-    () => typeof window !== "undefined" && (window.location.pathname === "/privacy-policy" || window.location.hash === "#privacy-policy"),
+    () =>
+      typeof window !== "undefined" &&
+      (window.location.pathname === "/privacy-policy" ||
+        window.location.hash === "#privacy-policy"),
   );
   const [expandedIndex, setExpandedIndex] = useState(-1);
 
@@ -245,7 +244,11 @@ function App() {
   const [orderError, setOrderError] = useState("");
 
   useEffect(() => {
-    const handleLocationChange = () => setShowPrivacyPolicy(window.location.pathname === "/privacy-policy" || window.location.hash === "#privacy-policy");
+    const handleLocationChange = () =>
+      setShowPrivacyPolicy(
+        window.location.pathname === "/privacy-policy" ||
+          window.location.hash === "#privacy-policy",
+      );
     window.addEventListener("hashchange", handleLocationChange);
     window.addEventListener("popstate", handleLocationChange);
     return () => {
@@ -500,7 +503,18 @@ function App() {
   ];
 
   if (showPrivacyPolicy) {
-    return <main className="min-h-screen bg-[#050812] text-white"><Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} activeSection={activeSection} scrollProgress={scrollProgress} /><PrivacyPolicy /><Footer /></main>;
+    return (
+      <main className="min-h-screen bg-[#050812] text-white">
+        <Header
+          mobileMenuOpen={mobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
+          activeSection={activeSection}
+          scrollProgress={scrollProgress}
+        />
+        <PrivacyPolicy />
+        <Footer />
+      </main>
+    );
   }
 
   return (
@@ -540,9 +554,16 @@ function App() {
       )}
 
       {/* Section - 01 */}
-      <section id="top" className="relative overflow-hidden bg-[#060b18]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_30%,rgba(65,118,255,0.34),transparent_0_22%),radial-gradient(circle_at_82%_70%,rgba(249,199,75,0.12),transparent_0_18%),linear-gradient(180deg,#060b18_0%,#0b172f_100%)]" />
-        <div className="relative mx-auto max-w-[1240px] px-3 pb-4 pt-[92px] sm:px-5 sm:pt-[96px] lg:px-0 lg:pt-[84px]">
+      <section
+        id="top"
+        className="relative overflow-hidden bg-[#060b18]"
+        style={{ height: "829px", opacity: 1, transform: "rotate(0deg)" }}
+      >
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_76%_30%,rgba(65,118,255,0.34),transparent_0_22%),radial-gradient(circle_at_82%_70%,rgba(249,199,75,0.12),transparent_0_18%),linear-gradient(180deg,#060b18_0%,#0b172f_100%)]"
+          style={{ height: "829px", opacity: 1, transform: "rotate(0deg)" }}
+        />
+        <div className="relative mx-auto flex h-full max-w-[1240px] flex-col px-3 pb-4 pt-[92px] sm:px-5 sm:pt-[96px] lg:px-0 lg:pt-[84px]">
           <Header
             mobileMenuOpen={mobileMenuOpen}
             setMobileMenuOpen={setMobileMenuOpen}
@@ -550,50 +571,48 @@ function App() {
             scrollProgress={scrollProgress}
           />
 
-          <div className="grid items-center gap-6 px-3 pb-10 pt-20 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8 lg:pt-24">
-            <div className="max-w-[560px] lg:pr-6">
+          <div className="grid flex-1 items-center gap-4 px-3 pb-10 pt-8 sm:px-5 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-6 lg:px-8 lg:pt-24">
+            <div className="order-2 mx-auto w-full max-w-[560px] text-center lg:order-1 lg:pr-6 lg:text-left">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#f7c84f]/30 bg-[#0c1426] px-4 py-2 text-[0.72rem] font-medium text-[#f7c84f] shadow-soft">
-                <span className="text-sm" aria-hidden="true"><img src={sparkleIcon} alt="" className="sparkle-icon h-4 w-4" /></span>
+                <span className="text-sm" aria-hidden="true">
+                  <img
+                    src={sparkleIcon}
+                    alt=""
+                    className="sparkle-icon h-4 w-4"
+                  />
+                </span>
                 বাংলাদেশে আমরাই প্রথম
               </div>
 
               <h1
-                className="hero-title-primary mt-8 whitespace-nowrap text-[clamp(2.15rem,5vw,4.12rem)] font-black tracking-[-0.05em] text-[#f8cb54] leading-[0.98]"
-                aria-label="Oxford 3000 Vocab"
+                className="hero-title-primary mt-6 mx-auto w-full max-w-[300px] text-center text-[clamp(32px,7vw,48px)] font-black tracking-[-0.05em] text-[#f8cb54] leading-[0.98] lg:mx-0 lg:max-w-none lg:mt-8 lg:text-left"
+                aria-label="অক্সফোর্ড ৩০০০ ভোকাব"
               >
-                {["Oxford", "3000", "Vocab"].map((word, index) => (
-                  <span
-                    key={word}
-                    className="hero-word mr-[0.28em] last:mr-0"
-                    style={{ animationDelay: `${index * 140}ms` }}
-                  >
-                    {word}
-                  </span>
-                ))}
+                <span className="hero-word block">
+                  <span className="mr-[0.2em]">অক্সফোর্ড</span>
+                  <span className="mr-[0.2em]">৩০০০</span>
+                </span>
+                <span className="hero-word block">ভোকাব</span>
               </h1>
               <h2
-                className="hero-title-secondary mt-3 whitespace-nowrap text-[clamp(2rem,4.1vw,3.18rem)] font-black tracking-[-0.05em] text-white leading-[1.02]"
-                aria-label="Complete Learning System"
+                className="hero-title-secondary mt-3 mx-auto w-full max-w-[300px] text-center text-[clamp(32px,7vw,48px)] font-black tracking-[-0.05em] text-white leading-[1.02] lg:mx-0 lg:max-w-none lg:mt-3 lg:text-left"
+                aria-label="সম্পূর্ণ লার্নিং সিস্টেম"
               >
-                {["Complete", "Learning", "System"].map((word, index) => (
-                  <span
-                    key={word}
-                    className="hero-word mr-[0.28em] last:mr-0"
-                    style={{ animationDelay: `${420 + index * 140}ms` }}
-                  >
-                    {word}
-                  </span>
-                ))}
+                <span className="hero-word block">
+                  <span className="mr-[0.2em]">সম্পূর্ণ</span>
+                  <span className="mr-[0.2em]">লার্নিং</span>
+                </span>
+                <span className="hero-word block">সিস্টেম</span>
               </h2>
 
-              <p className="mt-8 max-w-[34rem] text-[0.98rem] leading-8 text-white/65 sm:text-[1.02rem]">
+              <p className="mt-5 max-w-[34rem] text-[0.98rem] leading-8 text-white/65 sm:text-[1.02rem] lg:mt-8">
                 বই, App, Audio, Video ও Practice - সব একসাথে।
               </p>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-6 flex flex-row items-center justify-center gap-3 sm:flex-row sm:items-center lg:mt-7 lg:justify-start">
                 <a
                   href="#order"
-                  className="flex h-[46.938px] min-h-[46.4px] w-[242.047px] items-center justify-center gap-[8.8px] rounded-[12px] border border-[rgba(0,0,0,0)] bg-[linear-gradient(135deg,#FFE38E_0%,#F8C94B_46%,#F2B81E_100%)] px-[18.4px] py-[12.48px] text-center text-sm font-extrabold text-[#10172a] shadow-[0_11px_26px_0_rgba(248,201,75,0.22),0_1px_0_0_rgba(255,255,255,0.50)_inset] transition hover:-translate-y-0.5 hover:brightness-105"
+                  className="flex h-[48px] min-h-[32.48px] w-[174px] items-center justify-center gap-[8px] rounded-[12px] border border-[rgba(0,0,0,0)] bg-[linear-gradient(135deg,#FFE38E_0%,#F8C94B_46%,#F2B81E_100%)] px-[12px] py-[12px] text-center text-[12px] font-extrabold text-[#10172a] shadow-[0_11px_26px_0_rgba(248,201,75,0.22),0_1px_0_0_rgba(255,255,255,0.50)_inset] transition hover:-translate-y-0.5 hover:brightness-105 sm:w-[242.047px]"
                 >
                   এখনই অর্ডার করুন
                   <svg
@@ -613,7 +632,7 @@ function App() {
                 </a>
                 <a
                   href="#book"
-                  className="flex h-[46.938px] min-h-[46.4px] w-full max-w-[242.047px] shrink-0 items-center justify-center gap-[8.8px] rounded-[12px] border border-white/20 bg-white/[0.04] px-[18.4px] py-[12.48px] text-center text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.08]"
+                  className="flex h-[48px] min-h-[32.48px] w-[174px] items-center justify-center gap-[8px] rounded-[12px] border border-white/20 bg-white/[0.04] px-[12px] py-[12px] text-center text-[12px] font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.08] sm:max-w-[242.047px]"
                 >
                   <span>বইয়ের ভেতর দেখুন</span>
                   <svg
@@ -633,13 +652,13 @@ function App() {
                 </a>
               </div>
 
-              <div className="mt-4 flex items-center gap-2 text-sm text-white/55">
+              <div className="mt-4 flex items-center justify-center gap-2 text-sm text-white/55 lg:justify-start">
                 <span className="text-[#69d7a7]">✓</span>
                 সারা দেশে ক্যাশ অন ডেলিভারি
               </div>
             </div>
 
-            <div className="relative w-[min(100%,640px)] justify-self-center translate-x-0 lg:justify-self-end lg:translate-x-6">
+            <div className="order-1 relative mx-auto w-full max-w-[420px] justify-self-center translate-x-0 lg:order-2 lg:max-w-[640px] lg:justify-self-end lg:translate-x-6">
               <img
                 src={heroArtwork}
                 alt="Oxford 3000 vocabulary pack"
@@ -648,26 +667,6 @@ function App() {
             </div>
           </div>
 
-          <div className="mx-3 grid grid-cols-2 gap-4 border-t border-white/10 pb-8 pt-8 sm:grid-cols-2 lg:grid-cols-6 lg:gap-0 lg:px-8">
-            {[
-              ["৩,০০০", "মূল শব্দ"],
-              ["৩,০০০", "Dedicated Video"],
-              ["সম্পূর্ণ", "Audio"],
-              ["Learning Principles", "অনুযায়ী সাজান"],
-              ["Offline", "Android App"],
-              ["৳৫০", "ডেলিভারি চার্জ মাত্র"],
-            ].map(([title, subtitle]) => (
-              <div
-                key={title + subtitle}
-                className="hero-stat border-l border-white/10 pl-4 first:border-l-0 first:pl-0 lg:px-4"
-              >
-                <div className="text-2xl font-black text-[#f7c84f]">
-                  {title}
-                </div>
-                <div className="mt-1 text-sm text-white/60">{subtitle}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -675,18 +674,26 @@ function App() {
 
       <section
         id="how-it-works"
-        className="relative overflow-hidden bg-[#050812] px-4 py-20 sm:py-28 lg:py-32"
+        className="relative flex h-[337px] flex-col items-center gap-6 overflow-hidden bg-[#050B18] px-5 py-10 lg:h-[910.19px] lg:gap-0 lg:px-0 lg:py-[86.4px]"
       >
-        <div className="mx-auto max-w-[980px] text-center">
-          <h2 className="text-[clamp(1.6rem,3.2vw,2.6rem)] font-black text-white">
-            ১ মিনিটে দেখে নিন
-          </h2>
-          <p className="mt-2 text-sm text-white/60">
-            পুরো সিস্টেমটি ১ মিনিটে বুঝে নিন
-          </p>
+        <div className="w-full max-w-[350px] text-center lg:max-w-[1152px]">
+          <div className="flex flex-col items-center">
+            <h2 className="font-['Baloo_Da_2'] text-[28px] font-semibold leading-9 text-white lg:text-[44px] lg:leading-[74px] lg:tracking-[-0.79px]">
+              ১ মিনিটে দেখে নিন
+            </h2>
+            <img
+              src={explainerUnderline}
+              alt=""
+              aria-hidden="true"
+              className="mt-[-1px] h-auto w-[81px] lg:mt-[-3px] lg:w-[120px]"
+            />
+            <p className="hidden font-['Baloo_Da_2'] text-[17.6px] font-normal leading-[30px] text-[#B8C4D5] lg:mt-2 lg:block">
+              পুরো সিস্টেমটি ১ মিনিটে বুঝে নিন।
+            </p>
+          </div>
 
-          <div className="mt-8">
-            <div className="relative mx-auto aspect-video max-w-[990px] overflow-hidden rounded-xl bg-[#040914] shadow-[0_18px_40px_rgba(0,0,0,0.45)]">
+          <div className="mt-6 lg:mt-[52px]">
+            <div className="relative mx-auto h-[197px] w-full overflow-hidden rounded-2xl border border-[#12345A] bg-[#071526] shadow-[0_18px_42px_rgba(2,8,24,0.28)] lg:h-[558px] lg:w-[992px] lg:rounded-[32px] lg:border-[#E8B84E]/[0.28]">
               {videoPlaying ? (
                 <iframe
                   className="absolute inset-0 h-full w-full"
@@ -706,11 +713,11 @@ function App() {
                     type="button"
                     onClick={() => setVideoPlaying(true)}
                     aria-label="১ মিনিটের ভিডিও চালু করুন"
-                    className="absolute left-1/2 top-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[#F8C94B] shadow-[0_0_0_12.8px_rgba(248,201,75,0.12)] transition hover:scale-105 hover:bg-[#ffd86d]"
+                    className="absolute left-1/2 top-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[#F6C84B] transition hover:scale-105 hover:bg-[#ffd86d] lg:h-20 lg:w-20 lg:shadow-[0_0_0_12.8px_rgba(232,184,78,0.12)]"
                   >
                     <svg
                       viewBox="0 0 24 24"
-                      className="h-6 w-6 text-[#10172a]"
+                      className="h-5 w-5 text-[#071526] lg:h-7 lg:w-7"
                       aria-hidden="true"
                     >
                       <path d="M10 8l6 4-6 4V8z" fill="currentColor" />
@@ -718,51 +725,59 @@ function App() {
                   </button>
                 </>
               )}
+              <span className="absolute right-3 top-3 rounded-full border border-white/[0.14] bg-[#050B18]/[0.78] px-2 py-1 font-['Baloo_Da_2'] text-[12px] font-normal leading-[18px] text-white lg:right-4 lg:top-4 lg:px-3 lg:py-[6.4px] lg:text-[12.8px] lg:font-semibold lg:text-white">
+                ১ মিনিটে দেখুন
+              </span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#f6efdf] px-4 py-16 text-[#102034] sm:px-6 lg:px-8 lg:py-20">
-        {/* decorative overlay removed */}
-        <div className="absolute right-0 top-0 h-32 w-32 rounded-full border border-[#d9d3c8] opacity-60" />
-        <div className="absolute left-0 bottom-0 h-28 w-28 rounded-full border border-[#d9d3c8] opacity-60" />
+      <section className="benefits-section">
+        <div className="benefits-glow benefits-glow-top" />
+        <div className="benefits-glow benefits-glow-bottom" />
+        <div className="benefits-ring benefits-ring-top" />
+        <div className="benefits-ring benefits-ring-bottom" />
 
-        <div className="mx-auto max-w-[1200px] text-center">
-          <div className="text-[0.72rem] font-bold uppercase tracking-[0.42em] text-[#af8f46]">
-            Included with the book
+        <div className="benefits-content">
+          <div className="benefits-heading">
+            <div className="benefits-eyebrow">
+              <span />
+              INCLUDED WITH THE BOOK
+            </div>
+            <div className="benefits-title-wrap">
+              <h2>বইটির সাথে ফ্রি পাচ্ছেন</h2>
+              <img src={explainerUnderline} alt="" aria-hidden="true" />
+            </div>
+            <p>বই কিনলেই এগুলো পাচ্ছেন—আলাদা কোনো চার্জ নেই।</p>
           </div>
-          <h2 className="mt-4 text-[clamp(2rem,4vw,3.35rem)] font-black tracking-[-0.05em] text-[#22314a]">
-            বইটির সাথে ফ্রিতে যা পাচ্ছেন
-          </h2>
-          <p className="mt-4 text-[0.95rem] text-[#6b7487] sm:text-[1.02rem]">
-            বই কিনলেই এগুলো পাচ্ছেন—আলাদা কোনো চার্জ নেই।
-          </p>
 
-          <div className="included-card-grid mt-12">
+          <div className="benefits-grid">
             {featureCards.map((card) => (
               <article
                 key={card.title}
-                className="included-card group"
+                className="benefits-card"
                 style={{
                   "--card-color": card.color,
                   "--badge-color": card.badgeColor,
                 }}
               >
-                <div className="included-card-corner" />
-                <div className="included-card-icon">
-                  <CardIcon type={card.icon} />
+                <div className="benefits-card-halo" />
+                <div className="benefits-card-header">
+                  <div className="benefits-card-icon">
+                    <CardIcon type={card.icon} />
+                  </div>
+                  <span className="benefits-card-number">{card.bubble}</span>
                 </div>
-                <div className="included-card-badge">{card.badge}</div>
-                <h3 className="included-card-title">{card.title}</h3>
-                <p className="included-card-description">{card.description}</p>
-                <div className="included-card-number">{card.bubble}</div>
+                <div className="benefits-card-badge">{card.badge}</div>
+                <h3 className="benefits-card-title">{card.title}</h3>
+                <p className="benefits-card-description">{card.description}</p>
               </article>
             ))}
           </div>
 
-          <div className="mx-auto mt-6 max-w-[790px] rounded-[1rem] bg-[#102948] px-5 py-4 text-left text-[0.82rem] leading-7 text-white shadow-[0_16px_36px_rgba(9,15,28,0.18)] sm:px-6 sm:text-[0.92rem]">
-            <span className="flex w-full items-center justify-center gap-3 text-center">
+          <div className="benefits-note">
+            <span>
               <img src={infoIcon} alt="" className="h-5 w-5 shrink-0" />
               Offline App, Vocal Exercise ও Tongue Twister বইয়ের Study Guide-এ
               সরাসরি আছে।
@@ -771,60 +786,7 @@ function App() {
         </div>
       </section>
 
-      <section className="relative flex min-h-[670px] flex-col items-center justify-center self-stretch overflow-hidden bg-[linear-gradient(170deg,#040914_6.17%,#071022_93.83%)] px-6 py-24 text-white">
-        <div className="relative z-10 mx-auto w-full max-w-[896px] text-center">
-          <div className="text-[0.72rem] font-bold uppercase tracking-[0.42em] text-[#f7c84f]">
-            THE MASTERY LOOP
-          </div>
-          <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-normal tracking-[-0.04em] text-white">
-            একটি শব্দ শিখবেন যেভাবে
-          </h2>
-          <p className="mx-auto mt-5 max-w-[620px] text-sm leading-7 text-white/45 sm:text-[0.95rem]">
-            চারটি ধাপ পরপর একসঙ্গে কাজ করে — দেখা, শোনা, বলা ও রিভিশন একই ছন্দে।
-          </p>
-
-          <div className="mastery-loop-grid mt-14 text-left">
-            {learningSteps.map((step, index) => {
-              const cardStyles = [
-                "border-[#8f6d2a]/45 bg-[#1a1b1d]",
-                "border-[#2f7592]/45 bg-[#0d1c2c]",
-                "border-[#5451a6]/45 bg-[#13152f]",
-                "border-[#9b6334]/45 bg-[#1b191f]",
-              ];
-              const textStyles = [
-                "text-[#f7c84f]",
-                "text-[#72d9e8]",
-                "text-[#a99aff]",
-                "text-[#f7a23e]",
-              ];
-
-              return (
-                <article
-                  key={step.step}
-                  className={`relative min-h-[144px] overflow-hidden rounded-[16px] border p-7 ${cardStyles[index]}`}
-                >
-                  <div
-                    className={`text-[0.68rem] font-bold uppercase tracking-[0.28em] ${textStyles[index]}`}
-                  >
-                    {step.step}
-                  </div>
-                  <h3 className="mt-4 text-[1.18rem] font-normal text-white sm:text-[1.3rem]">
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 text-[0.82rem] leading-6 text-white/60 sm:text-sm">
-                    {step.desc}
-                  </p>
-                  <div
-                    className={`absolute -bottom-8 -right-3 text-[6rem] font-black leading-none opacity-[0.06] ${textStyles[index]}`}
-                  >
-                    {index + 1}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      
 
       <section
         id="book"
@@ -864,74 +826,74 @@ function App() {
                 </Document>
               </div>
               <div className="pdf-frame mx-auto mb-8 w-[min(860px,88%)]">
-                  <Document
-                    file={pdfFile}
-                    onLoadSuccess={handlePdfLoad}
-                    loading={<div className="pdf-loading">PDF loading...</div>}
-                    error={
-                      <div className="pdf-loading pdf-loading-error">
-                        PDF load করা যাচ্ছে না।
+                <Document
+                  file={pdfFile}
+                  onLoadSuccess={handlePdfLoad}
+                  loading={<div className="pdf-loading">PDF loading...</div>}
+                  error={
+                    <div className="pdf-loading pdf-loading-error">
+                      PDF load করা যাচ্ছে না।
+                    </div>
+                  }
+                >
+                  {isMobile ? (
+                    <div
+                      key={`mobile-view-${mobilePage}`}
+                      className={`pdf-page-viewport pdf-page-viewport-mobile pdf-mobile-page pdf-mobile-turn-${mobileTurnDirection} pdf-page-reveal`}
+                      onPointerDown={handlePdfPointerDown}
+                      onPointerUp={handlePdfPointerUp}
+                      onClick={handlePdfSurfaceClick}
+                    >
+                      <div className="pdf-mobile-single-stage">
+                        <div className="pdf-mobile-single-sheet">
+                          <Page
+                            pageNumber={mobilePage}
+                            width={430}
+                            renderTextLayer={false}
+                            renderAnnotationLayer={false}
+                            renderMode="canvas"
+                            className="pdf-page"
+                          />
+                        </div>
                       </div>
-                    }
-                  >
-                    {isMobile ? (
-                      <div
-                        key={`mobile-view-${mobilePage}`}
-                        className={`pdf-page-viewport pdf-page-viewport-mobile pdf-mobile-page pdf-mobile-turn-${mobileTurnDirection} pdf-page-reveal`}
-                        onPointerDown={handlePdfPointerDown}
-                        onPointerUp={handlePdfPointerUp}
-                        onClick={handlePdfSurfaceClick}
+                    </div>
+                  ) : (
+                    <div
+                      className={`pdf-pageflip-viewport ${isBookFlipping ? "is-flipping" : ""}`}
+                    >
+                      <HTMLFlipBook
+                        ref={flipBookRef}
+                        width={430}
+                        height={555}
+                        size="stretch"
+                        minWidth={280}
+                        maxWidth={430}
+                        minHeight={360}
+                        maxHeight={555}
+                        showCover={false}
+                        mobileScrollSupport
+                        useMouseEvents
+                        flippingTime={950}
+                        onFlip={handleFlipBookChange}
+                        onChangeState={handleFlipBookState}
                       >
-                        <div className="pdf-mobile-single-stage">
-                          <div className="pdf-mobile-single-sheet">
+                        {Array.from({ length: pdfPages }, (_, index) => (
+                          <PdfFlipPage key={`pdf-flip-page-${index + 1}`}>
                             <Page
-                              pageNumber={mobilePage}
+                              pageNumber={index + 1}
                               width={430}
                               renderTextLayer={false}
                               renderAnnotationLayer={false}
                               renderMode="canvas"
                               className="pdf-page"
                             />
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div
-                        className={`pdf-pageflip-viewport ${isBookFlipping ? "is-flipping" : ""}`}
-                      >
-                        <HTMLFlipBook
-                          ref={flipBookRef}
-                          width={430}
-                          height={555}
-                          size="stretch"
-                          minWidth={280}
-                          maxWidth={430}
-                          minHeight={360}
-                          maxHeight={555}
-                          showCover={false}
-                          mobileScrollSupport
-                          useMouseEvents
-                          flippingTime={950}
-                          onFlip={handleFlipBookChange}
-                          onChangeState={handleFlipBookState}
-                        >
-                          {Array.from({ length: pdfPages }, (_, index) => (
-                            <PdfFlipPage key={`pdf-flip-page-${index + 1}`}>
-                              <Page
-                                pageNumber={index + 1}
-                                width={430}
-                                renderTextLayer={false}
-                                renderAnnotationLayer={false}
-                                renderMode="canvas"
-                                className="pdf-page"
-                              />
-                            </PdfFlipPage>
-                          ))}
-                        </HTMLFlipBook>
-                      </div>
-                    )}
-                  </Document>
-                </div>
+                          </PdfFlipPage>
+                        ))}
+                      </HTMLFlipBook>
+                    </div>
+                  )}
+                </Document>
+              </div>
 
               <div className="mt-[24px] flex flex-col items-center">
                 {/* ================= CONTROLS ================= */}
@@ -1091,116 +1053,80 @@ function App() {
     lg:px-8
   "
       >
-        {/* ================= MAIN CONTAINER ================= */}
-        <div className="mx-auto w-full max-w-[1440px]">
-          {/* ================= TOP CONTENT ================= */}
-          <div
-            className="
-        mx-auto
-        grid
-        w-full
-        max-w-[1152px]
-        grid-cols-1
-        gap-[40px]
-        lg:grid-cols-2
-        lg:gap-[72px]
-      "
-          >
-            {/* ================= LEFT CONTENT ================= */}
-            <div className="text-center lg:text-left">
-              {/* THE BOOK, UNPACKED */}
-              <div
-                className="
-            font-['Inter']
-            text-[11px]
-            font-bold
-            uppercase
-            leading-[17px]
-            tracking-[2.8px]
-            text-[#73500C]
-            whitespace-nowrap
-          "
-              >
-                THE BOOK, UNPACKED
-              </div>
-
-              {/* MAIN TITLE */}
-              <h2
-                className="
-            mt-[14px]
-            w-full
-            whitespace-normal
-            lg:whitespace-nowrap
-            text-center
-            lg:text-left
-            font-['Hind_Siliguri']
-            text-[40px]
-            font-bold
-            leading-[52.53px]
-            tracking-[-0.79px]
-            text-[#0A1730]
-          "
-              >
-                বইটিতে যা যা রয়েছে
-              </h2>
+        <div className="word-atlas-container">
+          <div className="word-atlas-intro">
+            <div>
+              <div className="word-atlas-eyebrow">THE BOOK, UNPACKED</div>
+              <h2>প্রতিটি শব্দের জন্য রয়েছে</h2>
+              <img src={explainerUnderline} alt="" aria-hidden="true" />
             </div>
-
-            {/* ================= RIGHT DESCRIPTION ================= */}
-            <div
-          className="
-          flex
-          items-start
-          justify-center
-          lg:justify-end
-        "
-            >
-              <p
-                className="
-            m-0
-            w-full
-            max-w-[405px]
-            font-['Hind_Siliguri']
-            text-[17.6px]
-            font-normal
-            leading-[30.27px]
-            tracking-[-0.44px]
-            text-[#4D5A6B]
-            text-center
-            lg:text-left
-          "
-              >
-                একটি Word Page-এ শুধু অর্থ নয়—উচ্চারণ, ব্যবহার ও Revision-এর
-                প্রয়োজনীয় Cue-গুলোও একই Learning Sequence-এ সাজানো হয়েছে।
-              </p>
-            </div>
+            <p>
+              একটি Word Page-এ শুধু অর্থ নয়—উচ্চারণ, ব্যবহার ও Revision-এর
+              প্রয়োজনীয় Cue-গুলোও একই Learning Sequence-এ সাজানো হয়েছে।
+            </p>
           </div>
 
-          {/* ================= SINGLE BOOK IMAGE ================= */}
-          <div
-            className="
-        mx-auto
-        mt-[52px]
-        w-full
-        max-w-[1152px]
-      "
-          >
-            <img
-              src={bookDetail}
-              alt="Book detail"
-              className="
-          block
-          h-auto
-          w-full
-          object-contain
-          rounded-tl-[9.6px]
-          rounded-tr-[20px]
-          rounded-br-[20px]
-          rounded-bl-[9.6px]
-        "
-              style={{
-                boxShadow: "0px 14px 38px 0px #04091417",
-              }}
-            />
+          <div className="word-atlas-shell">
+            <div className="word-atlas-topbar">
+              <div className="word-atlas-mark">১২</div>
+              <div>
+                <h3>একটি শব্দের সম্পূর্ণ study kit</h3>
+                <p>
+                  শুরু থেকে revision পর্যন্ত প্রয়োজনীয় অংশ একসাথে খুঁজে নিন।
+                </p>
+              </div>
+            </div>
+
+            <div className="word-atlas-body">
+              <div className="word-atlas-practice">
+                <span>FEATURED PRACTICE TOOLS</span>
+                <h3>শুনুন, বলুন, মনে রাখুন</h3>
+                <div className="word-atlas-practice-row">
+                  <b>০১</b>
+                  <div>
+                    <strong>Tongue Twister</strong>
+                    <small>
+                      দেখা শব্দটি বারবার বলার জন্য practice support।
+                    </small>
+                  </div>
+                </div>
+                <div className="word-atlas-practice-row">
+                  <b>০২</b>
+                  <div>
+                    <strong>Vocal Exercise</strong>
+                    <small>
+                      শব্দটি active recall-এ ব্যবহারের জন্য practice support।
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <div className="word-atlas-anatomy">
+                <span>একটি WORD PAGE-এর ANATOMY</span>
+                <h3>শেখার দরকারি তথ্য একসাথে</h3>
+                <div className="word-atlas-fields">
+                  {[
+                    ["০১", "Serial Number"],
+                    ["০২", "Level"],
+                    ["০৩", "Parts of Speech"],
+                    ["০৪", "বাংলা অর্থ"],
+                    ["০৫", "বাংলা উচ্চারণ"],
+                    ["০৬", "IPA / Phonetic"],
+                    ["০৭", "Example"],
+                    ["০৮", "উদাহরণের অর্থ"],
+                    ["০৯", "Short Note"],
+                    ["১০", "Synonym"],
+                    ["১১", "Antonym"],
+                    ["১২", "Practice Check"],
+                  ].map(([number, label]) => (
+                    <div className="word-atlas-field" key={number}>
+                      <b>{number}</b>
+                      <strong>{label}</strong>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1270,13 +1196,15 @@ function App() {
   "
               >
                 <span className="block font-['Hind_Siliguri'] font-bold">
-                  শুধু বই নয়—পুরো একটি
-                </span>
-
-                <span className="block font-['Inter'] font-bold">
-                  Learning System
+                  ফ্রি অ্যান্ড্রয়েড অ্যাপ ডাউনলোড করুন
                 </span>
               </h2>
+              <img
+                src={explainerUnderline}
+                alt=""
+                aria-hidden="true"
+                className="learning-underline"
+              />
 
               {/* DESCRIPTION */}
               <p
@@ -1294,6 +1222,15 @@ function App() {
                 একই Vocabulary পড়া, শোনা, দেখা, প্র্যাকটিস ও ট্র্যাক করার জন্য
                 ছয়টি পরস্পর সংযুক্ত Learning Support।
               </p>
+              <a
+                href="https://play.google.com/store/search?q=Oxford%203000%20Vocab&c=apps"
+                target="_blank"
+                rel="noreferrer"
+                className="learning-download learning-download-desktop"
+              >
+                ডাউনলোড করুন
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
 
             {/* ================= HERO ARTWORK ================= */}
@@ -1307,7 +1244,7 @@ function App() {
         "
             >
               <img
-                src={heroArtwork}
+                src={androidApp}
                 alt="Book and digital learning support"
                 className="
             block
@@ -1373,7 +1310,12 @@ function App() {
 
                 <div>
                   <h3 className="font-['Inter'] text-[16px] font-bold leading-[22px] text-white">
-                    Vocabulary Book
+                    <span className="learning-desktop-title">
+                      Vocabulary Book
+                    </span>
+                    <span className="learning-mobile-title">
+                      ব্রিটিশ উচ্চারণ
+                    </span>
                   </h3>
 
                   <p className="mt-[7px] max-w-[230px] font-['Hind_Siliguri'] text-[13px] leading-[21px] text-[#8E99AA]">
@@ -1424,7 +1366,12 @@ function App() {
 
                 <div>
                   <h3 className="font-['Inter'] text-[16px] font-bold leading-[22px] text-white">
-                    Dedicated Android App
+                    <span className="learning-desktop-title">
+                      অ্যান্ড্রয়েড অ্যাপ
+                    </span>
+                    <span className="learning-mobile-title">
+                      আমেরিকান উচ্চারণ
+                    </span>
                   </h3>
 
                   <p className="mt-[7px] font-['Hind_Siliguri'] text-[13px] leading-[21px] text-[#8E99AA]">
@@ -1478,7 +1425,8 @@ function App() {
 
                 <div>
                   <h3 className="font-['Inter'] text-[16px] font-bold leading-[22px] text-white">
-                    Audio
+                    <span className="learning-desktop-title">অডিও পডকাস্ট</span>
+                    <span className="learning-mobile-title">ভিডিও লেসন</span>
                   </h3>
 
                   <p className="mt-[7px] font-['Hind_Siliguri'] text-[13px] leading-[21px] text-[#8E99AA]">
@@ -1531,7 +1479,8 @@ function App() {
 
                 <div>
                   <h3 className="font-['Inter'] text-[16px] font-bold leading-[22px] text-white">
-                    Video Lesson
+                    <span className="learning-desktop-title">ভিডিও লেসন</span>
+                    <span className="learning-mobile-title">অডিও পডকাস্ট</span>
                   </h3>
 
                   <p className="mt-[7px] font-['Hind_Siliguri'] text-[13px] leading-[21px] text-[#8E99AA]">
@@ -1584,7 +1533,12 @@ function App() {
 
                 <div>
                   <h3 className="font-['Inter'] text-[16px] font-bold leading-[22px] text-white">
-                    Practice Support
+                    <span className="learning-desktop-title">
+                      Practice Support
+                    </span>
+                    <span className="learning-mobile-title">
+                      প্রগ্রেস ট্র্যাকার
+                    </span>
                   </h3>
 
                   <p className="mt-[7px] max-w-[230px] font-['Hind_Siliguri'] text-[13px] leading-[21px] text-[#8E99AA]">
@@ -1635,7 +1589,12 @@ function App() {
 
                 <div>
                   <h3 className="font-['Inter'] text-[16px] font-bold leading-[22px] text-white">
-                    Progress Support
+                    <span className="learning-desktop-title">
+                      প্রগ্রেস ট্র্যাকার
+                    </span>
+                    <span className="learning-mobile-title">
+                      সম্পূর্ণ অফলাইন
+                    </span>
                   </h3>
 
                   <p className="mt-[7px] font-['Hind_Siliguri'] text-[13px] leading-[21px] text-[#8E99AA]">
@@ -1650,6 +1609,16 @@ function App() {
               <div className="absolute bottom-[16px] left-[64px] h-[2px] w-[64px] bg-gradient-to-r from-[#F7C84F] to-transparent" />
             </article>
           </div>
+
+          <a
+            href="https://play.google.com/store/search?q=Oxford%203000%20Vocab&c=apps"
+            target="_blank"
+            rel="noreferrer"
+            className="learning-download learning-download-mobile"
+          >
+            ডাউনলোড করুন
+            <span aria-hidden="true">→</span>
+          </a>
 
           {/* =========================================================
         BOTTOM CTA
@@ -1734,7 +1703,7 @@ function App() {
 
       {/* ================= WHO IT IS FOR ================= */}
       <section
-        className="
+        className="audience-section
     relative
     overflow-hidden
     bg-[#FFFDF7]
@@ -1811,6 +1780,15 @@ function App() {
             >
               এই বইটি কাদের জন্য
             </h2>
+            <img
+              src={explainerUnderline}
+              alt=""
+              aria-hidden="true"
+              className="audience-underline"
+            />
+            <p className="audience-lead">
+              প্রয়োজনীয় ভোকাবুলারি একটি নির্দিষ্ট ক্রমে রিভাইজ করুন।
+            </p>
           </div>
 
           {/* ================= CARDS ================= */}
@@ -1908,9 +1886,7 @@ function App() {
     text-[#8D6213]
   "
                 >
-                  SSC, HSC, University, BCS ও Bank Job
-                  <br />
-                  Candidate
+                  SSC, HSC, University, BCS & Bank Jobs
                 </div>
 
                 {/* Description */}
@@ -2012,7 +1988,7 @@ function App() {
               text-[#8D6213]
             "
                 >
-                  IELTS ও Spoken English Learner
+                  Communication Skills
                 </div>
 
                 {/* Description */}
@@ -2114,7 +2090,7 @@ function App() {
               text-[#8D6213]
             "
                 >
-                  Vocabulary Beginner ও Self Learner
+                  Beginners & Self-Learners
                 </div>
 
                 {/* Description */}
@@ -2148,7 +2124,7 @@ function App() {
     STUDENT PROOF
 ========================================================= */}
       <section
-        className="
+        className="student-proof-section
     relative
     overflow-hidden
     bg-[#050A14]
@@ -2186,6 +2162,7 @@ function App() {
             >
               <span
                 className="
+              student-proof-label-line
         h-[2px]
         w-[16px]
         shrink-0
@@ -2224,6 +2201,12 @@ function App() {
             >
               শিক্ষার্থীদের অভিজ্ঞতা
             </h2>
+            <img
+              src={explainerUnderline}
+              alt=""
+              aria-hidden="true"
+              className="student-proof-underline"
+            />
           </div>
 
           {/* =========================================================
@@ -2235,6 +2218,7 @@ function App() {
               {/* STUDENT STORIES */}
               <div
                 className="
+      student-stories-label
       flex
       items-center
       justify-center
@@ -2294,6 +2278,7 @@ function App() {
             <div
               className="
     student-proof-grid
+    student-proof-track
     mx-auto
     mt-[24px]
     grid
@@ -2309,6 +2294,7 @@ function App() {
         ======================================================= */}
               <div
                 className="
+              student-proof-card
             relative
             h-[570px]
             overflow-hidden
@@ -2318,11 +2304,13 @@ function App() {
             bg-[#07152D]
             shadow-[0_20px_45px_rgba(0,0,0,0.35)]
           "
-          >
+              >
                 <iframe
                   className="absolute inset-0 z-50 h-full w-full border-0"
                   src="https://www.youtube.com/embed/Pa0QmStjIUE?rel=0"
                   title="Student review video 1"
+                  loading="eager"
+                  fetchPriority="high"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
@@ -2510,7 +2498,7 @@ function App() {
                 text-white
               "
                   >
-                    শিক্ষার্থীর নাম
+                    শিক্ষার্থী ০১
                   </div>
 
                   <div
@@ -2521,7 +2509,7 @@ function App() {
                 text-white/55
               "
                   >
-                    পেশা
+                    ব্যবহারকারী
                   </div>
                 </div>
               </div>
@@ -2531,6 +2519,7 @@ function App() {
         ======================================================= */}
               <div
                 className="
+              student-proof-card
             relative
             h-[570px]
             overflow-hidden
@@ -2540,11 +2529,12 @@ function App() {
             bg-[#07152D]
             shadow-[0_20px_45px_rgba(0,0,0,0.35)]
           "
-          >
+              >
                 <iframe
                   className="absolute inset-0 z-50 h-full w-full border-0"
                   src="https://www.youtube.com/embed/3OSRv0XbYQE?rel=0"
                   title="Student review video 2"
+                  loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
@@ -2732,7 +2722,7 @@ function App() {
                 text-white
               "
                   >
-                    শিক্ষার্থীর নাম
+                    শিক্ষার্থী ০২
                   </div>
 
                   <div
@@ -2743,7 +2733,7 @@ function App() {
                 text-white/55
               "
                   >
-                    পেশা
+                    ব্যবহারকারী
                   </div>
                 </div>
               </div>
@@ -2753,6 +2743,7 @@ function App() {
         ======================================================= */}
               <div
                 className="
+              student-proof-card
             relative
             h-[570px]
             overflow-hidden
@@ -2762,11 +2753,12 @@ function App() {
             bg-[#07152D]
             shadow-[0_20px_45px_rgba(0,0,0,0.35)]
           "
-          >
+              >
                 <iframe
                   className="absolute inset-0 z-50 h-full w-full border-0"
                   src="https://www.youtube.com/embed/_YxU5qvYSYg?rel=0"
                   title="Student review video 3"
+                  loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
@@ -2954,7 +2946,7 @@ function App() {
                 text-white
               "
                   >
-                    শিক্ষার্থীর নাম
+                    শিক্ষার্থী ০৩
                   </div>
 
                   <div
@@ -2965,17 +2957,19 @@ function App() {
                 text-white/55
               "
                   >
-                    পেশা
+                    ব্যবহারকারী
                   </div>
                 </div>
               </div>
             </div>
+
+            <p className="student-proof-swipe-hint">ভিডিও দেখতে সোয়াইপ করুন</p>
           </div>
 
           {/* =========================================================
     WRITTEN FEEDBACK
 ========================================================= */}
-          <div className="mt-[52px]">
+          <div className="mt-[52px] hidden">
             {/* ================= HEADING ================= */}
             <div className="text-center">
               <div
@@ -3188,18 +3182,61 @@ function App() {
 ========================================================= */}
 
       <section
-        className="
-    relative
-    overflow-hidden
-    bg-[#FFFDF7]
-    px-4
-    py-[70px]
-    sm:px-6
-    sm:py-[76px]
-    lg:px-8
-    lg:py-[86.4px]
-  "
+        className="comparison-section"
+        aria-labelledby="comparison-title"
       >
+        <div className="comparison-content">
+          <h2 id="comparison-title">অন্যান্য বইয়ের সাথে আমাদের পার্থক্য</h2>
+          <img
+            src={explainerUnderline}
+            alt=""
+            aria-hidden="true"
+            className="comparison-underline"
+          />
+
+          <div className="comparison-table comparison-feature-table">
+            <div className="comparison-row comparison-header-row">
+              <div>বৈশিষ্ট্য</div>
+              <div>আমাদের বই</div>
+              <div>অন্যান্য বই</div>
+            </div>
+            {[
+              ["অ্যান্ড্রয়েড অ্যাপ", true, false],
+              ["ভিডিও লেসন", true, false],
+              ["অডিও পডকাস্ট", true, false],
+              ["প্রগ্রেস ট্র্যাকার", true, false],
+              ["বাংলা অর্থ", true, true],
+              ["গ্রামার নোট", true, false],
+              ["চেকলিস্ট বক্স", true, false],
+              ["পার্টস অব স্পিচ", true, true],
+              ["ভোকাল এক্সারসাইজ", true, false],
+              ["টাং টুইস্টার", true, false],
+              ["অক্সফোর্ড সিকোয়েন্স", true, false],
+              ["এক্সাম্পল", true, true],
+            ].map(([feature, ours, others]) => (
+              <div className="comparison-row" key={feature}>
+                <div className="comparison-feature">{feature}</div>
+                <div className="comparison-status comparison-ours">
+                  <span className="comparison-check">{ours ? "✓" : "×"}</span>
+                </div>
+                <div className="comparison-status comparison-others">
+                  <span
+                    className={
+                      others
+                        ? "comparison-check is-positive"
+                        : "comparison-check is-negative"
+                    }
+                  >
+                    {others ? "✓" : "×"}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="comparison-legacy-section relative overflow-hidden bg-[#FFFDF7] px-4 py-[70px] sm:px-6 sm:py-[76px] lg:px-8 lg:py-[86.4px]">
         {/* Subtle Figma background glow */}
         <div
           className="
@@ -3846,412 +3883,6 @@ function App() {
       {/* =========================================================
     ANDROID COMPANION
 ========================================================= */}
-      <section
-        id="android-app"
-        className="
-    relative
-    overflow-hidden
-    bg-[#FDEEC2]
-    px-4
-    py-[70px]
-    text-[#0A1730]
-    sm:px-6
-    sm:py-[76px]
-    lg:px-8
-    lg:py-[86.4px]
-  "
-      >
-        <div
-          className="
-      mx-auto
-      flex
-      w-full
-      max-w-[1152px]
-      flex-col
-      lg:h-[465.81px]
-      lg:flex-row
-      lg:items-start
-      lg:justify-between
-    "
-        >
-          {/* =======================================================
-        LEFT CONTENT
-    ======================================================= */}
-          <div
-            className="android-copy
-        flex
-        w-full
-        max-w-[447.55px]
-        flex-col
-        items-start
-        lg:mt-[1px]
-      "
-          >
-            {/* ANDROID COMPANION */}
-            <div
-              className="
-          flex
-          h-[36.19px]
-          w-full
-          items-start
-        "
-            >
-              <div
-                className="
-            flex
-            h-[17px]
-            items-center
-            gap-[8px]
-            font-['Inter']
-            text-[12px]
-            font-bold
-            uppercase
-            leading-[16px]
-            tracking-[1.56px]
-            text-[#73500C]
-          "
-              >
-                <span
-                  className="
-              h-[2px]
-              w-[16px]
-              shrink-0
-              rounded-full
-              bg-[#73500C]
-            "
-                />
-
-                <span>ANDROID COMPANION</span>
-              </div>
-            </div>
-
-            {/* MAIN HEADING */}
-            <h2
-              className="
-          m-0
-          w-full
-          max-w-[448px]
-          font-['Hind_Siliguri']
-          text-[40px]
-          font-bold
-          leading-[53px]
-          tracking-[-0.7929px]
-          text-[#0A1730]
-        "
-            >
-              ফ্রি Android App ডাউনলোড করুন
-            </h2>
-
-            {/* DESCRIPTION */}
-            <p
-              className="
-          m-0
-          mt-[14.39px]
-          w-full
-          max-w-[447.55px]
-          font-['Inter']
-          text-[16px]
-          font-normal
-          leading-[27px]
-          tracking-[-0.3125px]
-          text-[#0A1730]
-        "
-            >
-              Offline—যেকোনো সময় Practice করুন।
-            </p>
-
-            {/* FREE ACCESS NOTE */}
-            <div
-              className="
-          mt-[17.59px]
-          mb-[21.59px]
-          box-border
-          flex
-          min-h-[24px]
-          w-full
-          max-w-[447.55px]
-          items-center
-          border-l-2
-          border-[#1F9FB5]
-          pl-[13.6px]
-        "
-            >
-              <p
-                className="
-            m-0
-            font-['Hind_Siliguri']
-            text-[14.08px]
-            font-semibold
-            leading-[24px]
-            tracking-[-0.15675px]
-            text-[#0A1730]
-          "
-              >
-                বইয়ের সঙ্গে ডেডিকেটেড Android App-এর অ্যাক্সেস সম্পূর্ণ ফ্রি।
-              </p>
-            </div>
-
-            {/* =======================================================
-          DOWNLOAD BUTTON
-          APP LINK
-      ======================================================= */}
-            <div
-              className="
-          flex
-          h-[46.94px]
-          w-full
-          items-start
-        "
-            >
-              <a
-                href="https://app.englishcommando.bd/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-            box-border
-            flex
-            h-[46.94px]
-            min-h-[46.4px]
-            w-[167.5px]
-            items-center
-            justify-center
-            gap-[8.8px]
-            whitespace-nowrap
-            rounded-[12px]
-            bg-gradient-to-br
-            from-[#FFE38E]
-            via-[#F8C94B]
-            to-[#F2B81E]
-            px-[18.4px]
-            py-[12.48px]
-            font-['Hind_Siliguri']
-            text-[15.2px]
-            font-bold
-            leading-[19px]
-            tracking-[-0.325375px]
-            text-[#071229]
-            shadow-[0px_11px_26px_rgba(248,201,75,0.22),inset_0px_1px_0px_rgba(255,255,255,0.5)]
-            transition-all
-            duration-200
-            hover:-translate-y-[2px]
-            hover:shadow-[0px_14px_30px_rgba(248,201,75,0.28),inset_0px_1px_0px_rgba(255,255,255,0.5)]
-          "
-              >
-                <span className="whitespace-nowrap">ডাউনলোড করুন</span>
-
-                {/* Download Icon */}
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="shrink-0"
-                >
-                  <path
-                    d="M12 4V15"
-                    stroke="#071229"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                  />
-
-                  <path
-                    d="M7.5 11.5L12 16L16.5 11.5"
-                    stroke="#071229"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-
-                  <path
-                    d="M5 20H19"
-                    stroke="#071229"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </a>
-            </div>
-          </div>
-
-          {/* =======================================================
-        RIGHT CONTENT
-    ======================================================= */}
-          <div
-            className="
-        relative
-        mt-[45px]
-        flex
-        w-full
-        max-w-[544px]
-        flex-col
-        items-center
-        lg:mt-0
-      "
-          >
-            {/* =====================================================
-          ANDROID APP IMAGE
-      ===================================================== */}
-            <div
-              className="
-          flex
-          h-[334px]
-          w-full
-          items-center
-          justify-center
-        "
-            >
-              <img
-                src={androidApp}
-                alt="Dedicated Android App — Word Practice, Audio, Video and Progress"
-                className="
-            block
-            h-[334px]
-            w-[344px]
-            max-w-full
-            select-none
-            object-contain
-            drop-shadow-[0px_18px_48px_rgba(0,0,0,0.25)]
-          "
-              />
-            </div>
-
-            {/* =====================================================
-          SUPPORT PILLS
-      ===================================================== */}
-            <div
-              className="
-          mt-[24px]
-          flex
-          w-full
-          max-w-[544px]
-          flex-wrap
-          items-center
-          justify-center
-          gap-[8.8px]
-          lg:flex-nowrap
-          lg:justify-center
-        "
-            >
-              {/* Word Practice */}
-              <span
-                className="
-            box-border
-            flex
-            h-[46.4px]
-            min-h-[46.4px]
-            w-[129.39px]
-            shrink-0
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-[rgba(31,159,181,0.25)]
-            bg-[#FFFDF7]
-            px-[11.4px]
-            py-[15.7px]
-            font-['Inter']
-            text-[12.16px]
-            font-bold
-            leading-[15px]
-            tracking-[-0.0114px]
-            text-[#071229]
-            shadow-[0px_7px_17px_rgba(4,9,20,0.06)]
-          "
-              >
-                Word Practice
-              </span>
-
-              {/* Audio */}
-              <span
-                className="
-            box-border
-            flex
-            h-[46.4px]
-            min-h-[46.4px]
-            w-[129.41px]
-            shrink-0
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-[rgba(31,159,181,0.25)]
-            bg-[#FFFDF7]
-            px-[11.4px]
-            py-[15.7px]
-            font-['Inter']
-            text-[12.16px]
-            font-bold
-            leading-[15px]
-            tracking-[-0.0114px]
-            text-[#071229]
-            shadow-[0px_7px_17px_rgba(4,9,20,0.06)]
-          "
-              >
-                Audio
-              </span>
-
-              {/* Video */}
-              <span
-                className="
-            box-border
-            flex
-            h-[46.4px]
-            min-h-[46.4px]
-            w-[129.41px]
-            shrink-0
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-[rgba(31,159,181,0.25)]
-            bg-[#FFFDF7]
-            px-[11.4px]
-            py-[15.7px]
-            font-['Inter']
-            text-[12.16px]
-            font-bold
-            leading-[15px]
-            tracking-[-0.0114px]
-            text-[#071229]
-            shadow-[0px_7px_17px_rgba(4,9,20,0.06)]
-          "
-              >
-                Video
-              </span>
-
-              {/* Progress */}
-              <span
-                className="
-            box-border
-            flex
-            h-[46.4px]
-            min-h-[46.4px]
-            w-[129.41px]
-            shrink-0
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-[rgba(31,159,181,0.25)]
-            bg-[#FFFDF7]
-            px-[11.4px]
-            py-[15.7px]
-            font-['Inter']
-            text-[12.16px]
-            font-bold
-            leading-[15px]
-            tracking-[-0.0114px]
-            text-[#071229]
-            shadow-[0px_7px_17px_rgba(4,9,20,0.06)]
-          "
-              >
-                Progress
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Section - 11 */}
 
@@ -4348,16 +3979,23 @@ function App() {
     m-0
     w-full
     whitespace-nowrap
-    font-['Hind_Siliguri']
-    text-[34px]
-    font-bold
-    leading-[48px]
+    font-['Baloo_Da_2']
+    text-[40px]
+    font-semibold
+    leading-[67px]
     tracking-[0.367031px]
     text-[#071229]
   "
               >
                 সাধারণ প্রশ্ন ও উত্তর
               </h2>
+
+              <img
+                src={explainerUnderline}
+                alt=""
+                aria-hidden="true"
+                className="faq-title-underline"
+              />
 
               {/* DESCRIPTION + PHONE */}
 
@@ -4573,7 +4211,7 @@ function App() {
                 text-[#071229]
               "
                   >
-                    মোট মূল্য কত? ডেলিভারি চার্জ আছে?
+                    মোট মূল্য কত? ডেলিভারি কি ফ্রি?
                   </span>
 
                   <span
@@ -4634,7 +4272,7 @@ function App() {
                   text-[#536174]
                 "
                     >
-                      মোট অফার মূল্য ৳৫৪৮। ডেলিভারি চার্জ মাত্র ৳৪৯।
+                      মোট মূল্য ৳৪৯৯। সারা দেশে ডেলিভারি ফ্রি।
                     </p>
                   </div>
                 )}
@@ -4678,7 +4316,7 @@ function App() {
                 text-[#071229]
               "
                   >
-                    App কি Android-এর জন্য?
+                    অ্যাপ কি অ্যান্ড্রয়েডের জন্য?
                   </span>
 
                   <span
@@ -4845,9 +4483,9 @@ function App() {
                   text-[#536174]
                 "
                     >
-                      না। পরীক্ষার প্রস্তুতির পাশাপাশি Spoken English, IELTS এবং
-                      দৈনন্দিন ব্যবহারের জন্য শব্দের অর্থ, উচ্চারণ ও Example
-                      বুঝতে এটি সাজানো হয়েছে।
+                      না। পরীক্ষার প্রস্তুতির পাশাপাশি স্পোকেন ইংলিশ, আইইএলটিএস
+                      এবং দৈনন্দিন ব্যবহারের জন্য শব্দের অর্থ, উচ্চারণ ও
+                      এক্সাম্পল বুঝতে এটি সাজানো হয়েছে।
                     </p>
                   </div>
                 )}
@@ -4891,7 +4529,7 @@ function App() {
                 text-[#071229]
               "
                   >
-                    আমি একদম beginner হলে শুরু করতে পারব?
+                    আমি একদম বিগিনার হলে শুরু করতে পারব?
                   </span>
 
                   <span
@@ -4952,8 +4590,8 @@ function App() {
                   text-[#536174]
                 "
                     >
-                      Oxford sequence, বাংলা অর্থ ও উচ্চারণ এবং ধাপে ধাপে
-                      learning loop থাকায় beginner-ও শুরু করতে পারবেন।
+                      অক্সফোর্ড ক্রম, বাংলা অর্থ ও উচ্চারণ এবং ধাপে ধাপে লার্নিং
+                      লুপ থাকায় বিগিনারও শুরু করতে পারবেন।
                     </p>
                   </div>
                 )}
@@ -5164,7 +4802,7 @@ function App() {
                   text-[#536174]
                 "
                     >
-                      0140-545-8800-2 নম্বরে কল করে support-এর সঙ্গে কথা বলতে
+                      0140-545-8800-2 নম্বরে কল করে সাপোর্ট-এর সঙ্গে কথা বলতে
                       পারেন।
                     </p>
                   </div>
@@ -5361,10 +4999,17 @@ function App() {
           lg:leading-[62px]
         "
             >
-              আগে বই বুঝে নিন,
+              আগে বই বুঝে নিন তার পরে
               <br />
-              পণ্য হাতে পেয়ে টাকা দিন।
+              টাকা দিন
             </h2>
+
+            <img
+              src={explainerUnderline}
+              alt=""
+              aria-hidden="true"
+              className="checkout-title-underline"
+            />
 
             {/* =================================================
           DELIVERY PROMISE
@@ -5381,11 +5026,12 @@ function App() {
           lg:text-[20px]
         "
             >
-              <span className="block whitespace-nowrap">
-                সারা দেশে ক্যাশ অন ডেলিভারি — ডেলিভারি চার্জ মাত্র
+              <span className="order-promise-full block whitespace-nowrap">
+                সারা দেশে ক্যাশ অন ডেলিভারি — ফ্রি ডেলিভারি
               </span>
-
-              <span className="block whitespace-nowrap font-normal">৳৫০</span>
+              <span className="order-promise-short hidden whitespace-nowrap font-normal">
+                ক্যাশ অন ডেলিভারি · ফ্রি ডেলিভারি
+              </span>
             </p>
 
             {/* =================================================
@@ -5475,13 +5121,9 @@ function App() {
               text-[#FFFDF8]
             "
                 >
-                  Oxford 3000
+                  Oxford 3000 Vocab বই +
                   <br />
-                  Vocab বই +
-                  <br />
-                  Dedicated
-                  <br />
-                  Android App
+                  Dedicated Android App
                 </p>
               </div>
 
@@ -5556,9 +5198,7 @@ function App() {
               text-[#FFFDF8]
             "
                 >
-                  Audio, Video,
-                  <br />
-                  Practice ও
+                  Audio, Video, Practice ও
                   <br />
                   Progress Support
                 </p>
@@ -5749,21 +5389,7 @@ function App() {
               max-[520px]:text-center
             "
                 >
-                  সারা দেশে ক্যাশ অন ডেলিভারি — ডেলিভারি চার্জ মাত্র
-                </span>
-
-                {/* 50 */}
-                <span
-                  className="
-              whitespace-nowrap
-              font-['Hind_Siliguri']
-              text-[13.6px]
-              font-bold
-              leading-[14px]
-              text-[#FFE180]
-            "
-                >
-                  ৳৫০
+                  সারা দেশে ক্যাশ অন ডেলিভারি — ফ্রি ডেলিভারি
                 </span>
               </div>
 
@@ -5811,7 +5437,7 @@ function App() {
                   text-[#071229]
                 "
                     >
-                      Oxford 3000 Vocab বই + App
+                      অক্সফোর্ড ৩০০০ ভোকাব + অ্যাপ
                     </div>
                   </div>
 
@@ -5839,7 +5465,7 @@ function App() {
                   text-[#071229]
                 "
                     >
-                      ৳৫৪৯
+                      ৳৪৯৯
                     </div>
                   </div>
                 </div>
@@ -5861,17 +5487,7 @@ function App() {
               text-[#4D5A6B]
             "
                 >
-                  <span>
-                    বই{" "}
-                    <strong className="font-bold text-[#071229]">৳৪৯৯</strong>
-                  </span>
-
-                  <span className="font-['Inter']">+</span>
-
-                  <span>
-                    ডেলিভারি চার্জ মাত্র{" "}
-                    <strong className="font-bold text-[#071229]">৳৫০</strong>
-                  </span>
+                  <span>বই ৳৪৯৯ · ডেলিভারি ফ্রি</span>
                 </div>
 
                 {/* COD chip */}
@@ -5953,6 +5569,7 @@ function App() {
                       id="name"
                       name="name"
                       type="text"
+                      placeholder="আপনার পূর্ণ নাম"
                       className="
                   mt-[4.47px]
                   box-border
@@ -6044,6 +5661,7 @@ function App() {
                     id="district"
                     name="district"
                     type="text"
+                    placeholder="জেলা / এলাকা লিখুন"
                     className="
                 mt-[4.47px]
                 box-border
@@ -6087,6 +5705,7 @@ function App() {
                     id="address"
                     name="address"
                     rows={3}
+                    placeholder="বাড়ি, রোড, থানা সহ সম্পূর্ণ ঠিকানা"
                     className="
                 mt-[4.47px]
                 box-border
@@ -6182,21 +5801,7 @@ function App() {
             text-[#4D5A6B]
           "
               >
-                তথ্য শুধু ডেলিভারির জন্য ব্যবহার হবে{" "}
-                <a
-                  href="/privacy-policy"
-                  className="
-              font-medium
-              text-[#73500C]
-              underline
-              decoration-[#73500C]
-              underline-offset-[3px]
-              transition
-              hover:text-[#A47A19]
-            "
-                >
-                  নীতিমালা
-                </a>
+                আপনার তথ্য শুধু ডেলিভারির জন্য ব্যবহার হবে।
               </p>
             </div>
           </form>
