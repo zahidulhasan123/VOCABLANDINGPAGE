@@ -19,6 +19,10 @@ import Header from "./header";
 import PrivacyPolicy from "./privacy-policy";
 // bookDetail (image4.png) removed per request
 
+// In dev, "/api" is proxied by Vite (see vite.config.js). In production builds
+// there is no dev server proxy, so we need the real API origin.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
 
 const featureCards = [
@@ -322,7 +326,7 @@ function App() {
     };
 
     try {
-      const response = await fetch("/api/orders/", {
+      const response = await fetch(`${API_BASE_URL}/api/orders/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
