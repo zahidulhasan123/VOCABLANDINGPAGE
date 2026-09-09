@@ -4,6 +4,7 @@ function Footer() {
   return (
     <footer
       className="
+        footer-root
         box-border
         w-full
         border-t
@@ -37,6 +38,7 @@ function Footer() {
         ================================================= */}
         <div
           className="
+            footer-mobile-left
             flex
             w-full
             flex-col
@@ -59,7 +61,7 @@ function Footer() {
             {/* Logo */}
             <img
               src={logo}
-              alt="Oxford 3000 Vocabulary System"
+              alt="অক্সফোর্ড ৩০০০ ভোকাবুলারি সিস্টেম"
               className="
                 h-[37.64px]
                 w-[49.59px]
@@ -78,36 +80,35 @@ function Footer() {
                 flex-col
               "
             >
-              {/* Oxford 3000 */}
+              {/* অক্সফোর্ড ৩০০০ */}
               <div
                 className="
                   whitespace-nowrap
-                  font-['Inter']
+                  font-['Baloo_Da_2']
                   text-[15.36px]
                   font-bold
-                  leading-[16px]
+                  leading-[16.13px]
                   tracking-[-0.0312px]
                   text-white
                 "
               >
-                Oxford 3000
+                অক্সফোর্ড ৩০০০
               </div>
 
-              {/* Vocabulary System */}
+              {/* ভোকাবুলারি সিস্টেম */}
               <div
                 className="
                   mt-[4px]
                   whitespace-nowrap
-                  font-['Inter']
+                  font-['Baloo_Da_2']
                   text-[11.36px]
                   font-semibold
-                  uppercase
-                  leading-[12px]
+                  leading-[11.93px]
                   tracking-[1.1786px]
-                  text-[#F8C94B]
+                  text-[#E8B84E]
                 "
               >
-                Vocabulary System
+                ভোকাবুলারি সিস্টেম
               </div>
             </div>
           </a>
@@ -115,22 +116,21 @@ function Footer() {
           {/* Description */}
           <p
             className="
-              m-0
-              mt-[8px]
-              w-full
-              max-w-[371.5px]
-              footer-description
-              whitespace-nowrap
-              font-['Inter']
-              text-[13.76px]
-              font-normal
-              leading-[23px]
-              tracking-[-0.131688px]
-              text-[#B2BFD0]
-            "
+    m-0
+    mt-[8px]
+    w-full
+    max-w-[371.5px]
+    footer-description
+    whitespace-nowrap
+    font-['Inter']
+    text-[13.76px]
+    font-normal
+    leading-[23px]
+    tracking-[-0.131688px]
+    text-[#B2BFD0]
+  "
           >
-            English Commando-এর বই ও digital learning support{" "}
-            <span className="footer-description-last">একসাথে।</span>
+            বই + অ্যাপ + লার্নিং সাপোর্ট
           </p>
         </div>
 
@@ -139,6 +139,7 @@ function Footer() {
         ================================================= */}
         <div
           className="
+            footer-mobile-links
             flex
             w-full
             flex-col
@@ -201,7 +202,7 @@ function Footer() {
                 text-[#D0D9E6]
               "
             >
-              গোপনীয়তা নীতি
+              গোপনীয়তা
             </span>
           </a>
 
@@ -232,7 +233,7 @@ function Footer() {
                 text-[#D0D9E6]
               "
             >
-              উপরে ফিরে যান
+              উপরে যান
             </span>
 
             <svg
@@ -259,6 +260,7 @@ function Footer() {
       ===================================================== */}
       <div
         className="
+          footer-mobile-copy
           mx-auto
           mt-[18px]
           w-full
