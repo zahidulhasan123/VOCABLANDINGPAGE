@@ -2428,7 +2428,6 @@ function App() {
                   src="https://www.youtube.com/embed/Pa0QmStjIUE?rel=0"
                   title="Student review video 1"
                   loading="eager"
-                  fetchPriority="high"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />

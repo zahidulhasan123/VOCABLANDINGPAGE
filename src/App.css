@@ -8831,6 +8831,8 @@ button {
   }
 
   .word-atlas-fields {
+    width: min(100%, 420px);
+    margin-inline: auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 12px;
   }
@@ -8838,6 +8840,8 @@ button {
   .word-atlas-field {
     gap: 7px;
     padding: 9px 8px 9px 4px;
+    justify-content: flex-start;
+    text-align: left;
   }
 
   .word-atlas-field strong {
@@ -9126,8 +9130,10 @@ button {
 @media (max-width: 767px) {
   .decision-section {
     width: 100%;
-    padding: 55px 16px;
+    min-height: auto;
+    padding: 52px 16px 40px;
     overflow-x: hidden;
+    background: #050b18;
   }
 
   .decision-container {
@@ -9136,12 +9142,21 @@ button {
     overflow-x: hidden;
   }
 
-  .decision-heading {
+  .decision-section > div {
     width: 100%;
-    max-width: 100%;
   }
 
-  .decision-heading h2 {
+  .decision-section > div > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .decision-section > div > div:first-child > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     max-width: 100%;
   }
@@ -9166,21 +9181,139 @@ button {
     text-align: center;
     font-size: 28px !important;
     line-height: 1.3 !important;
+  }
 
+  .decision-section > div > div:first-child > div:first-child > p,
+  .decision-section > div > div:first-child > div:first-child > a {
+    display: none;
+  }
+
+  .decision-section h2 {
+    width: 100%;
+    max-width: 332px;
+    margin: 0;
+    text-align: center;
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.3px;
     white-space: normal !important;
     overflow: visible !important;
     overflow-wrap: normal !important;
     word-break: normal !important;
-
-    letter-spacing: -0.3px;
   }
 
-  .decision-heading p {
-    width: 100%;
-    max-width: 100%;
+  #decision img.learning-underline {
+    display: block;
+    width: 92px !important;
+    max-width: 92px !important;
+    height: auto;
+    margin: 0 auto;
+  }
 
-    font-size: 14px !important;
-    line-height: 23px !important;
+  .learning-download-desktop {
+    display: none;
+  }
+
+  .decision-section > div > div:first-child > div:last-child {
+    width: min(100%, 320px);
+    margin: 0 auto;
+  }
+
+  .decision-section > div > div:first-child > div:last-child img {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .decision-section > div > div:nth-child(2) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+    padding: 12px;
+    border: 1px solid #173a57;
+    border-radius: 20px;
+    background: rgba(7, 21, 38, 0.92);
+  }
+
+  .decision-section > div > div:nth-child(2) article {
+    min-height: 72px;
+    height: 72px;
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .decision-section > div > div:nth-child(2) article > div:first-child {
+    height: 72px;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .decision-section
+    > div
+    > div:nth-child(2)
+    article
+    > div:first-child
+    > div:first-child {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .decision-section > div > div:nth-child(2) article h3 {
+    font-size: 15px;
+    line-height: 22px;
+    white-space: nowrap;
+  }
+
+  .decision-section > div > div:nth-child(2) article p,
+  .decision-section > div > div:nth-child(2) article > div:last-child {
+    display: none;
+  }
+
+  .learning-desktop-title {
+    display: none;
+  }
+
+  .learning-mobile-title {
+    display: inline;
+  }
+
+  .learning-download-mobile {
+    display: flex;
+    width: 100%;
+    max-width: 280px;
+    margin: 18px auto 0;
+  }
+
+  .decision-cta {
+    display: flex;
+    min-height: 52px;
+    margin-top: 18px;
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+  }
+
+  .decision-cta > div:first-child {
+    display: none;
+  }
+
+  .decision-cta > a,
+  .decision-cta > button {
+    width: 100%;
+    min-width: 0;
+    height: 52px;
+    border-radius: 12px;
+    font-size: 15px;
   }
 }
 
